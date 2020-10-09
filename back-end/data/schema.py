@@ -6,34 +6,42 @@ def schema(dbpath='covid.db'):
 
         cursor.execute("""
         CREATE TABLE covidDataContinents(
-            positiveCases
-            recoveredCases
-            mortalityRate
-            totalCases
+            date DATE,
+            continent_name VARCHAR, 
+            positive_cases INTEGER,
+            recovered_cases INTEGER,
+            mortality_rate INTEGER,
+            total_cases INTEGER
         );""")
 
         cursor.execute("""
         CREATE TABLE covidDataCountries(
-            positiveCases
-            recoveredCases
-            mortalityRate
-            totalCases
+            date DATE,
+            country_name VARCHAR,
+            positive_cases INTEGER,
+            recovered_cases INTEGER, 
+            mortality_rate INTEGER, 
+            total_cases INTEGER 
         );""")
 
         cursor.execute("""
         CREATE TABLE covidDataStates(
-            positiveCases
-            recoveredCases
-            mortalityRate
-            totalCases
+            date DATE,
+            state_name VARCHAR,
+            positive_cases INTEGER,
+            recovered_cases INTEGER, 
+            mortality_rate INTEGER, 
+            total_cases INTEGER 
         );""")
 
         cursor.execute("""
         CREATE TABLE covidDataCounties(
-            positiveCases
-            recoveredCases
-            mortalityRate
-            totalCases
+            date DATE,
+            county_name VARCHAR,
+            positive_cases INTEGER,
+            recovered_cases INTEGER, 
+            mortality_rate INTEGER, 
+            total_cases INTEGER 
         );""")
 if __name__ = '__main__':
     schema()
