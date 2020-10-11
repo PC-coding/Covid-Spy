@@ -18,7 +18,7 @@ export default function Signup() {
             {/* <p>Email:</p> */}
             <input type='text' name='email' id='email' placeholder='Enter your email'></input>
             <br></br>
-            <Link to="/login">Existing user? Login here!</Link>
+            <Link style={{color:'white', textDecoration:'none'}} to="/login">Existing user? Login here!</Link>
             <br></br>
             <button>Complete</button>
             <br></br>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
+import Space from './video/Space.mp4';
 
 export default function Login() {
-  const [username, setUsername] = useState("Hello");
-  const [password, setPassword] = useState("Hello");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const sendLogin = async () => {
     const userData = JSON.stringify({"username": username, "password": password});
@@ -25,8 +26,9 @@ export default function Login() {
             <h1>Login</h1>
             <input onChange={e => setUsername(e.target.value)} type="text" placeholder="Username" /><br/>
             <input onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" /><br/>
+            <Link style={{color:'white', textDecoration:'none'}} to="/signup">New user? Create an account here!</Link>
+            <br></br>
             <button onClick={sendLogin}>Login</button><br/>
-            <Link to="/signup">New user? Create an account here!</Link>
         </div>
         )
     }
