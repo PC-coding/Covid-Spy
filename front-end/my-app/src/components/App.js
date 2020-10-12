@@ -7,7 +7,7 @@ import Space from './video/Space.mp4';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  // const loggedIn = true;
+  // const [loggedIn, setLoggedIn] = useState(true);
 
   return (
   <BrowserRouter className="App">

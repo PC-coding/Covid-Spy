@@ -7,7 +7,7 @@ from models.account import Account
 
 app = Flask(__name__)
 
-@app.route("/login", methods=["POST"])
+@app.route("/covid/login", methods=["POST"])
 def login():
     data = request.get_json()
     username = data.get('username')
@@ -21,7 +21,7 @@ def login():
     return jsonify({"session_id": None,
                         "username": ""})
 
-@app.route("/create", methods=["POST"])
+@app.route("/covid/create", methods=["POST"])
 def create_user():
     data = request.get_json()
     key = Account.random_api_key()

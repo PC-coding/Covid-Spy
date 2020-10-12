@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import Space from './video/Space.mp4';
 
-export default function Login() {
+export default function Login( loggedIn ) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
