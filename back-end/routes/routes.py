@@ -79,8 +79,22 @@ def search_by_all_counties(date):
 
 
 
+@app.route('/covid/', methods=[''])
+def ():
+    return jsonify
 
+@app.route('/covid/', methods=[''])
+def ():
+    return jsonify
 
-@app.route('', methods=[''])
+@app.route('/covid/', methods=[''])
+def ():
+    return jsonify
+
+@app.route('/covid/', methods=[''])
+def ():
+    return jsonify
+
+@app.route('/covid/', methods=[''])
 def ():
     return jsonify

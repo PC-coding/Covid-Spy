@@ -42,7 +42,7 @@ class States:
         return False
 
     @classmethod
-    def select_all_states(cls, date):
+    def states_by_date(cls, date):
         with sqlite3.connect(cls.dbpath) as conn:
             cursor = conn.cursor()
             sql = f"""
@@ -51,3 +51,15 @@ class States:
             cursor.execute(sql, (date,))
             return cursor.fetchall()
         return []
+    
+     @classmethod
+    def select_all_states(cls, date):
+        with sqlite3.connect(cls.dbpath) as conn:
+            cursor = conn.cursor()
+            sql = f"""
+            SELECT * FROM {cls.tablename} WHERE state_name =?
+            ;"""
+            cursor.execute(sql, (date,))
+            return cursor.fetchall()
+        return []
+    
