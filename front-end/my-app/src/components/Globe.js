@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function globe() {
+export default function Globe() {
     return(
         <div className='pulse'>
             <span></span>

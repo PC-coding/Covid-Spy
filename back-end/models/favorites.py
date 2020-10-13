@@ -39,4 +39,4 @@ class Favorites:
                 country_name=?,
                 continent_name=?
             WHERE account_pk=?"""
-            cursor.execute(sql, (self.email, self.api_key, self.pk))
+            cursor.execute(sql, (self.date, self.county_name, self.state_name, self.country_name, self.continent_name, self.account_pk))
