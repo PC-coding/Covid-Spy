@@ -60,7 +60,8 @@ def schema(dbpath='covid.db'):
             county_name VARCHAR,
             state_name VARCHAR,
             country_name VARCHAR,
-            continent_name VARCHAR,
+            continent_name VARCHAR
         );""")
-if __name__ = '__main__':
+
+if __name__ == "__main__":
     schema()

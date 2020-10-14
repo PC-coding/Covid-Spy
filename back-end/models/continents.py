@@ -4,7 +4,8 @@ class Continents:
     tablename = 'covidDataContinents'
     dbpath = 'data/covid.db'
 
-    def __init__(self, date, continent_name, positive_cases=0, recovered_cases=0, mortality_rate=0, total_cases=0):
+    def __init__(self, date, continent_name, positive_cases=0, 
+                recovered_cases=0, mortality_rate=0, total_cases=0):
         self.date = date
         self.continent_name = continent_name
         self.positive_cases = positive_cases
@@ -24,7 +25,8 @@ class Continents:
                 mortality_rate,
                 total_cases
             ) VALUES (?,?,?,?,?,?)"""
-            values = (self.date, self.continent_name, self.positive_cases, self.recovered_cases, self.mortality_rate, self.total_cases)
+            values = (self.date, self.continent_name, self.positive_cases, self.recovered_cases, 
+                    self.mortality_rate, self.total_cases)
             cursor.execute(sql, values)
             return True
         return False
@@ -52,11 +54,14 @@ class Continents:
             return cursor.fetchall()
         return []
     
-    @classmethod
-    def select_all_continent_month(cls, date):
-        with sqlite3.connect(cls.dbpath) as conn:
-            cursor = conn.cursor()
-            sql = f"""
-            SELECT * FROM {cls.tablename} WHERE date =? - 00/30/00
-            ;"""
+    # @classmethod
+    # def select_all_continent_month(cls, date):
+    #     with sqlite3.connect(cls.dbpath) as conn:
+    #         cursor = conn.cursor()
+    #         sql = f"""
+    #         SELECT * FROM {cls.tablename} WHERE date =? - 00/30/00
+    #         ;"""
+    #         cursor.execute(sql, (date,))
+    #         return cursor.fetchall()
+    #     return []
     

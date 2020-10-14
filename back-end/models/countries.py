@@ -4,7 +4,8 @@ class Countries:
     tablename = 'covidDataCountries'
     dbpath = 'data/covid.db'
 
-    def __init__(self, date, country_name, positive_cases=0, recovered_cases=0, mortality_rate=0, total_cases=0):
+    def __init__(self, date, country_name, positive_cases=0, recovered_cases=0, 
+                mortality_rate=0, total_cases=0):
         self.date = date
         self.country_name = country_name
         self.positive_cases = positive_cases
@@ -24,7 +25,8 @@ class Countries:
                 mortality_rate,
                 total_cases
             ) VALUES (?,?,?,?,?,?)"""
-            values = (self.date, self.country_name, self.positive_cases, self.recovered_cases, self.mortality_rate, self.total_cases)
+            values = (self.date, self.country_name, self.positive_cases, 
+                    self.recovered_cases, self.mortality_rate, self.total_cases)
             cursor.execute(sql, values)
             return True
         return False

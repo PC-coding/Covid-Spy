@@ -4,7 +4,7 @@ import Login from './Login';
 import Signup from './Signup';
 import Map from './worldMap';
 import Graph from './Graphs';
-import Globe from './Globe';
+// import Globe from './Globe';
 
 const Router = ({ loggedIn }) => {
     if (loggedIn) {
@@ -27,9 +27,9 @@ const Router = ({ loggedIn }) => {
                 <Route path='/signup'>
                     <Signup loggedIn={loggedIn}/>
                 </Route>
-                <Route path='/globes'>
+                {/* <Route path='/globes'>
                     <Globe loggedIn={loggedIn} />
-                </Route>
+                </Route> */}
             </div>
         )
     }

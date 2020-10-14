@@ -4,7 +4,8 @@ class Favorites:
     tablename = 'favorites'
     dbpath = 'data/covid.db'
 
-    def __init__(self, account_pk, date, county_name, state_name, country_name, continent_name):
+    def __init__(self, account_pk, date, county_name, state_name, 
+                country_name, continent_name):
         self.account_pk = account_pk
         self.date = date
         self.county_name = county_name
@@ -23,7 +24,8 @@ class Favorites:
                 country_name,
                 continent_name,
             ) VALUES (?,?,?,?,?)"""
-            values = (self.date, self.county_name, self.state_name, self.country_name, self.continent_name)
+            values = (self.date, self.county_name, self.state_name, 
+            self.country_name, self.continent_name)
             cursor.execute(sql, values)
             return True
         return False
@@ -39,4 +41,6 @@ class Favorites:
                 country_name=?,
                 continent_name=?
             WHERE account_pk=?"""
-            cursor.execute(sql, (self.date, self.county_name, self.state_name, self.country_name, self.continent_name, self.account_pk))
+            cursor.execute(sql, (self.date, self.county_name, self.state_name, 
+                                self.country_name, self.continent_name, 
+                                self.account_pk))

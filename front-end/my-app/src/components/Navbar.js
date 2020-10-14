@@ -9,8 +9,8 @@ const NavBar = ({ loggedIn }) => {
                 <Link to='/'> 
                     <img src={img} className='top-nav-icon' alt='icon' />
                 </Link>
-                <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/worldmap'> </Link>
-                <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/graphs'> </Link>
+                <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/worldmap'>Map</Link>
+                <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/graphs'>Graphs</Link>
             </nav>
         )
     } else {

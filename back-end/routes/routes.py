@@ -7,6 +7,13 @@ from models.account import Account
 
 app = Flask(__name__)
 
+@app.route('/', methods=['GET'])
+def hi():
+    return 'hi'
+
+
+
+
 @app.route("/covid/login", methods=["POST"])
 def login():
     data = request.get_json()
@@ -25,7 +32,8 @@ def login():
 def create_user():
     data = request.get_json()
     key = Account.random_api_key()
-    new_account = Account(data.get('username'), data.get('password'), key, data.get('email'))
+    new_account = Account(data.get('username'), data.get('password'), key, 
+                data.get('email'))
     new_account.insert()
     return jsonify({"session_id": new_account.api_key,
                     "username": new_account.username})
@@ -33,24 +41,24 @@ def create_user():
 
 
 
-@app.route('/covid/continent/<continent_name>', methods=['GET'])
-def search_by_continent(continent_name):
-    name = Continents.select_continent(continent_name)
+@app.route('/covid/continent/<continent_name>/<date>', methods=['GET'])
+def search_by_continent(continent_name, date):
+    name = Continents.select_continent(continent_name, date)
     return jsonify({'Continent': name})
 
-@app.route('/covid/country/<country_name>', methods=['GET'])
-def search_by_country(country_name):
-    name = Countries.select_country(country_name)
+@app.route('/covid/country/<country_name>/<date>', methods=['GET'])
+def search_by_country(country_name, date):
+    name = Countries.select_country(country_name, date)
     return jsonify({'Country': name})
 
-@app.route('/covid/state/<state_name>', methods=['GET'])
-def search_by_state(state_name):
-    name = States.select_state(state_name)
+@app.route('/covid/state/<state_name>/<date>', methods=['GET'])
+def search_by_state(state_name, date):
+    name = States.select_state(state_name, date)
     return jsonify({'State': name})
 
-@app.route('/covid/county/<county_name>', methods=['GET'])
-def search_by_county(county_name):
-    name = Counties.select_county(county_name)
+@app.route('/covid/county/<county_name>/<date>', methods=['GET'])
+def search_by_county(county_name, date):
+    name = Counties.select_county(county_name, date)
     return jsonify({'County': name})
 
 
@@ -79,22 +87,22 @@ def search_by_all_counties(date):
 
 
 
-@app.route('/covid/', methods=[''])
-def ():
-    return jsonify
+# @app.route('/covid/', methods=[''])
+# def ():
+#     return jsonify
 
-@app.route('/covid/', methods=[''])
-def ():
-    return jsonify
+# @app.route('/covid/', methods=[''])
+# def ():
+#     return jsonify
 
-@app.route('/covid/', methods=[''])
-def ():
-    return jsonify
+# @app.route('/covid/', methods=[''])
+# def ():
+#     return jsonify
 
-@app.route('/covid/', methods=[''])
-def ():
-    return jsonify
+# @app.route('/covid/', methods=[''])
+# def ():
+#     return jsonify
 
-@app.route('/covid/', methods=[''])
-def ():
-    return jsonify
+# @app.route('/covid/', methods=[''])
+# def ():
+#     return jsonify
