@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import Space from './video/Space.mp4';
 
 export default function Login( { loggedIn } ) {
   const [username, setUsername] = useState("");
@@ -24,6 +23,7 @@ export default function Login( { loggedIn } ) {
     return (
         <div className='login'>
             <h1>Login</h1>
+            <br></br>
             <input onChange={e => setUsername(e.target.value)} type="text" placeholder="Username" /><br/>
             <input onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" /><br/>
             <Link style={{color:'white', textDecoration:'none'}} to="/signup">New user? Create an account here!</Link>

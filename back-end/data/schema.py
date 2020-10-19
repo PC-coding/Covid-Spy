@@ -1,12 +1,12 @@
 import sqlite3
 
-def schema(dbpath='covid.db'):
+def schema(dbpath="covid.db"):
     with sqlite3.connect(dbpath) as conn:
         cursor = conn.cursor()
 
         cursor.execute("""
-        CREATE TABLE covidDataContinents(
-            date INTEGER,
+        CREATE TABLE covid_data_continents (
+            time_stamp INTEGER,
             continent_name VARCHAR, 
             positive_cases INTEGER,
             recovered_cases INTEGER,
@@ -15,8 +15,8 @@ def schema(dbpath='covid.db'):
         );""")
 
         cursor.execute("""
-        CREATE TABLE covidDataCountries(
-            date INTEGER,
+        CREATE TABLE covid_data_countries (
+            time_stamp INTEGER,
             country_name VARCHAR,
             positive_cases INTEGER,
             recovered_cases INTEGER, 
@@ -25,8 +25,8 @@ def schema(dbpath='covid.db'):
         );""")
 
         cursor.execute("""
-        CREATE TABLE covidDataStates(
-            date INTEGER,
+        CREATE TABLE covid_data_states (
+            time_stamp INTEGER,
             state_name VARCHAR,
             positive_cases INTEGER,
             recovered_cases INTEGER, 
@@ -35,8 +35,8 @@ def schema(dbpath='covid.db'):
         );""")
 
         cursor.execute("""
-        CREATE TABLE covidDataCounties(
-            date INTEGER,
+        CREATE TABLE covid_data_counties (
+            time_stamp INTEGER,
             county_name VARCHAR,
             positive_cases INTEGER,
             recovered_cases INTEGER, 
@@ -55,7 +55,7 @@ def schema(dbpath='covid.db'):
 
         cursor.execute("""
         CREATE TABLE favorites(
-            date INTEGER,
+            time_stamp INTEGER,
             account_pk INTEGER,
             county_name VARCHAR,
             state_name VARCHAR,

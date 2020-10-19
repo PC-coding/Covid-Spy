@@ -1,55 +1,90 @@
 import sqlite3
 
 class Countries:
-    tablename = 'covidDataCountries'
+    tablename = 'covid_data_countries'
     dbpath = 'data/covid.db'
 
-    def __init__(self, date, country_name, positive_cases=0, recovered_cases=0, 
+    def __init__(self, time_stamp, country_name, positive_cases=0, recovered_cases=0, 
                 mortality_rate=0, total_cases=0):
-        self.date = date
+        self.time_stamp = time_stamp
         self.country_name = country_name
         self.positive_cases = positive_cases
         self.recovered_cases = recovered_cases
         self.mortality_rate = mortality_rate
         self.total_cases = total_cases
     
+    # def save(self):
+    #     if self.country_name:
+    #         self._update()
+    #     else:
+    #         self._insert()
+    
     def save(self):
         with sqlite3.connect(self.dbpath) as conn:        
             cursor = conn.cursor()
             sql = f"""
             INSERT INTO {self.tablename} (
-                date,
+                time_stamp,
                 country_name,
                 positive_cases,
                 recovered_cases,
                 mortality_rate,
                 total_cases
             ) VALUES (?,?,?,?,?,?)"""
-            values = (self.date, self.country_name, self.positive_cases, 
+            values = (self.time_stamp, self.country_name, self.positive_cases, 
                     self.recovered_cases, self.mortality_rate, self.total_cases)
             cursor.execute(sql, values)
             return True
         return False
 
+    # def _update(self):
+    #     with sqlite3.connect(self.dbpath) as conn:
+    #         cursor = conn.cursor()
+    #         sql = f"""
+    #         UPDATE {self.tablename} SET
+    #             time_stamp,
+    #             positive_cases,
+    #             recovered_cases,
+    #             mortality_rate,
+    #             total_cases
+    #         ) VALUES (?,?,?,?,?,?)"""
+    #         values = (self.time_stamp, self.positive_cases, 
+    #                 self.recovered_cases, self.mortality_rate, self.total_cases)
+    #         cursor.execute(sql, values)
+    #         return True
+    #     return False
+    
     @classmethod
-    def select_country(cls, country_name, date):
+    def select_country(cls, country_name, time_stamp):
         with sqlite3.connect(cls.dbpath) as conn:
             cursor = conn.cursor()
             sql= f"""
-            SELECT * FROM {cls.tablename} WHERE country_name =?, date =?
+            SELECT * FROM {cls.tablename} WHERE country_name =?, time_stamp =?
             ;"""
-            values = (country_name, date,)
+            values = (cls.country_name, cls.time_stamp)
             cursor.execute(sql, values)
             return cursor.fetchall()
         return False
 
+    # @classmethod
+    # def select_all_countries(cls, date):
+    #     with sqlite3.connect(cls.dbpath) as conn:
+    #         cursor = conn.cursor()
+    #         sql = f"""
+    #         SELECT * FROM {cls.tablename} WHERE date =?
+    #         ;"""
+    #         cursor.execute(sql, (date,))
+    #         return cursor.fetchall()
+    #     return []
+
+
     @classmethod
-    def select_all_countries(cls, date):
+    def select_all_countries(cls, time_stamp):
         with sqlite3.connect(cls.dbpath) as conn:
             cursor = conn.cursor()
             sql = f"""
-            SELECT * FROM {cls.tablename} WHERE date =?
+            SELECT * FROM {cls.tablename} WHERE time_stamp =?
             ;"""
-            cursor.execute(sql, (date,))
+            cursor.execute(sql, (cls.time_stamp,))
             return cursor.fetchall()
         return []

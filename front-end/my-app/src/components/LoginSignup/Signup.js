@@ -6,6 +6,7 @@ export default function Signup() {
     return(
         <div className='signup'>
             <h1>Sign Up!</h1>
+            <br></br>
             {/* <p>Enter your desired Username:</p> */}
             <input type='text' name='username' id='user' placeholder='Desired username'></input>
             <br></br>

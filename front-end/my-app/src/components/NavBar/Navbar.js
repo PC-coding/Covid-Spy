@@ -9,7 +9,7 @@ const NavBar = ({ loggedIn }) => {
                 <Link to='/'> 
                     <img src={img} className='top-nav-icon' alt='icon' />
                 </Link>
-                <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/worldmap'>Map</Link>
+                <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/tracker'>Map-Tracker</Link>
                 <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/graphs'>Graphs</Link>
             </nav>
         )
@@ -21,7 +21,7 @@ const NavBar = ({ loggedIn }) => {
                 </Link>
                 <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/login'>Login</Link>
                 <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/signup'>Signup</Link>
-                <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/globe'>Globe</Link>
+                {/* <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/tracker'>Map-Tracker</Link> */}
             </nav>
         )
     }

@@ -1,9 +1,81 @@
-.App {
-  text-align: center;  
-  margin: 0;
-  padding: 0;
-  background: #000;
-  height: 100vh;
+.app {
+  text-align: center;
+  width: 100%;
+  height: 120vh;
+  background: url(./components/images/SpaceStars.jpg);
+  background-size: cover;
+  animation: animatebg 60s linear infinite;
+
+}
+
+.pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: url(./components/images/earth.png);
+  /* background: url(./components/images/earth-map.jpg); */
+  background-size: cover;
+  animation: animateEarth 20s linear infinite;
+  border-radius: 50%;
+  box-shadow: inset 0 0 40px rgba(255,255,255,.5);
+} 
+
+.pulse span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid #fff;
+  box-sizing: border-box;
+  animation: animate 8s linear infinite;
+}
+.pulse span:nth-child(1) {
+  animation-delay: 0s;
+}
+.pulse span:nth-child(2) {
+  animation-delay: 2s;
+}
+.pulse span:nth-child(3) {
+  animation-delay: 4s;
+}
+
+@keyframes animate {
+  0% {
+      width: 400px;
+      height: 400px;
+      opacity: 1;
+  }
+  50% {
+      opacity: 1;
+  }
+  100% {
+      width: 800px;
+      height: 800px;
+      opacity: 0;
+  }
+}
+@keyframes animateEarth {
+  0% {
+      background-position: 0 0;
+  }
+  100% {
+      background-position: 719px 0;
+  }
+}
+@keyframes animatebg {
+  0% {
+      background-position: 0 0;
+  }
+  100% {
+    background-position: 1600px;
+      /* background-position: 1920px 0; */
+  }
 }
 
 .App-logo {
@@ -18,7 +90,6 @@
 }
 
 .App-header {
-  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: top;
@@ -26,10 +97,6 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
-/* .App-link {
-  color: #61dafb;
-} */
 
 @keyframes top-nav-icon-spin {
   from {
@@ -69,28 +136,12 @@
   z-index: -1;
 } */
 
-.pulse {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  width: 200px;
-  height: 200px;
-  background: url(./components/images/earth.png);
-  background-size: cover;
-  animation: animateEarth infinite 6s linear;
-  border-radius: 50%;
-  box-shadow: inset 0 0 40px  rgba(255,255,255,.5);
+div.transition-group {
+  position: relative;
 }
-
-@keyframes animateEarth
-{
-  0%
-  {
-    background-position: 0 0;
-  }
-  100%
-  {
-    background-position: 719px 0;
-  }
+section.route-section {
+position: absolute;
+width: 100%;
+top: 0;
+left: 0;
 }
