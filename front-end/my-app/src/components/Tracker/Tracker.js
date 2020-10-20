@@ -3,8 +3,8 @@ import { MenuItem, FormControl, Select, Card, CardContent } from "@material-ui/c
 import './Tracker.css';
 import InfoBox from '../InfoBox/InfoBox.js';
 import Map from '../Map/map.js';
-import Table from '../Table/Table.js';
-import LineGraph from '../Graphs/LineGraph.js';
+// import Table from '../Table/Table.js';
+// import LineGraph from '../Graphs/LineGraph.js';
 import { sortData, prettyPrintStat } from '../util.js';
 import "leaflet/dist/leaflet.css";
 

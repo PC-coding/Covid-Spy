@@ -5,13 +5,17 @@ class Countries:
     dbpath = 'data/covid.db'
 
     def __init__(self, time_stamp, country_name, positive_cases=0, recovered_cases=0, 
-                mortality_rate=0, total_cases=0):
+                mortality_rate=0, total_cases=0, iso2, lat, long, flag):
         self.time_stamp = time_stamp
         self.country_name = country_name
         self.positive_cases = positive_cases
         self.recovered_cases = recovered_cases
         self.mortality_rate = mortality_rate
         self.total_cases = total_cases
+        self.iso2 = iso2
+        self.lat = lat
+        self.long = long
+        self.flag = flag 
     
     # def save(self):
     #     if self.country_name:
@@ -29,10 +33,15 @@ class Countries:
                 positive_cases,
                 recovered_cases,
                 mortality_rate,
-                total_cases
-            ) VALUES (?,?,?,?,?,?)"""
+                total_cases,
+                iso2,
+                lat,
+                long,
+                flag
+            ) VALUES (?,?,?,?,?,?,?,?,?,?)"""
             values = (self.time_stamp, self.country_name, self.positive_cases, 
-                    self.recovered_cases, self.mortality_rate, self.total_cases)
+                    self.recovered_cases, self.mortality_rate, self.total_cases,
+                    self.iso2, self.lat, self.long, self.flag)
             cursor.execute(sql, values)
             return True
         return False

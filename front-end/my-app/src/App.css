@@ -1,7 +1,8 @@
 .app {
   text-align: center;
   width: 100%;
-  height: 120vh;
+  /* height: 120vh; */
+  height: 110vh;
   background: url(./components/images/SpaceStars.jpg);
   background-size: cover;
   animation: animatebg 60s linear infinite;
@@ -96,6 +97,7 @@
   justify-content: top;
   font-size: calc(10px + 2vmin);
   color: white;
+  /* background: black; */
 }
 
 @keyframes top-nav-icon-spin {

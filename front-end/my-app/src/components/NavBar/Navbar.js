@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import img from '/Users/tappy/Byte/Phase_3_Project/front-end/my-app/src/covid19_cell.png';
+import './Navbar.js'
 
 const NavBar = ({ loggedIn }) => {
     if (loggedIn) {
         return(
-            <nav>
+            <nav className='navStyle'>
                 <Link to='/'> 
                     <img src={img} className='top-nav-icon' alt='icon' />
                 </Link>
@@ -15,7 +16,7 @@ const NavBar = ({ loggedIn }) => {
         )
     } else {
         return(
-            <nav>
+            <nav className='navStyle1'>
                 <Link to='/'> 
                     <img src={img} className='top-nav-icon' alt='icon' />
                 </Link>

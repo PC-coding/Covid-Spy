@@ -21,8 +21,8 @@ def hi():
 @app.route("/covid/login", methods=["POST"])
 def login():
     data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
+    username = data.get("username")
+    password = data.get("password")
     account = Account.login(username, password)
     if account:
         account.api_key = Account.random_api_key()
@@ -36,8 +36,8 @@ def login():
 def create_user():
     data = request.get_json()
     key = Account.random_api_key()
-    new_account = Account(data.get('username'), data.get('password'), key, 
-                data.get('email'))
+    new_account = Account(data.get("username"), data.get("password"), key, 
+                data.get("email"))
     new_account.insert()
     return jsonify({"session_id": new_account.api_key,
                     "username": new_account.username})
@@ -52,10 +52,10 @@ def search_by_continent(continent_name, time_stamp):
 
 @app.route('/covid/country/<country_name>/<time_stamp>', methods=['GET'])
 def search_by_country(country_name, time_stamp):
-    data = requests.get(API_BASE).json()
+    # data = requests.get(API_BASE).json()
     # name = Countries.select_country(country_name, time_stamp)
-    name = Countries(data.get('country_name'), data.get('time_stamp'))
-    country = name.select_country(country_name, time_stamp)
+    # name = Countries(data.get('country_name'), data.get('time_stamp'))
+    country = Countries.select_country(country_name, time_stamp)
     return jsonify({'Country': country})
 
 @app.route('/covid/state/<state_name>/<time_stamp>', methods=['GET'])
@@ -104,11 +104,12 @@ def search_by_all_counties(time_stamp):
 @app.route('/covid/save_country/', methods=['GET'])
 def save_countries():
     countries = requests.get(API_BASE).json()
-    print(countries)
+    # print(countries)
     for country in countries:
         new_data = Countries(country.get('updated'), country.get('country'), country.get('active'), 
                         country.get('recovered'), country.get('deaths'), 
-                        country.get('cases'))
+                        country.get('cases'), country.get('iso2'), country.get('lat'),
+                        country.get('long'), country.get('flag'))
         new_data.save()
     return jsonify({'Country': countries})
 
