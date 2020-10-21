@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import img from '/Users/tappy/Byte/Phase_3_Project/front-end/my-app/src/covid19_cell.png';
 import './Navbar.js'
 
-const NavBar = ({ loggedIn }) => {
-    if (loggedIn) {
+const NavBar = ({ token, setToken }) => {
+    if (token) {
         return(
             <nav className='navStyle'>
                 <Link to='/'> 
@@ -12,6 +12,7 @@ const NavBar = ({ loggedIn }) => {
                 </Link>
                 <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/tracker'>Map-Tracker</Link>
                 <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/graphs'>Graphs</Link>
+                <Redirect from='/' to='/graphs' />
             </nav>
         )
     } else {

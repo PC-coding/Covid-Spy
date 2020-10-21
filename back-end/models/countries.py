@@ -4,8 +4,8 @@ class Countries:
     tablename = 'covid_data_countries'
     dbpath = 'data/covid.db'
 
-    def __init__(self, time_stamp, country_name, positive_cases=0, recovered_cases=0, 
-                mortality_rate=0, total_cases=0, iso2, lat, long, flag):
+    def __init__(self, time_stamp, country_name, positive_cases, recovered_cases, 
+                mortality_rate, total_cases, iso2, lat, long, flag):
         self.time_stamp = time_stamp
         self.country_name = country_name
         self.positive_cases = positive_cases

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MenuItem, FormControl, Select, Card, CardContent } from "@material-ui/core";
+import { MenuItem, FormControl, Select } from "@material-ui/core";
 import './Tracker.css';
 import InfoBox from '../InfoBox/InfoBox.js';
 import Map from '../Map/map.js';
@@ -106,14 +106,6 @@ function Tracker() {
 
         <Map casesType={casesType} countries={mapCountries} center={mapCenter} zoom={mapZoom}/>
       </div> 
-      {/* <Card className="app_right">
-        <CardContent>
-          <h3>Live Cases by Country</h3>
-          <Table countries={tableData} />
-          <h3>Worldwide new {casesType}</h3>
-          <LineGraph className="app_graph" casesType={casesType}/>
-        </CardContent>
-      </Card> */}
     </div>
   );
 }

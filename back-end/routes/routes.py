@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from models.continents import Continents
 from models.countries import Countries
 from models.states import States
@@ -9,6 +10,7 @@ import requests
 API_BASE = 'https://disease.sh/v3/covid-19/countries'
 
 app = Flask(__name__)
+CORS(app)
 
 #checking to see if localhost works
 @app.route('/', methods=['GET'])
@@ -17,28 +19,31 @@ def hi():
 
 
 
-#login routes
+#user routes
 @app.route("/covid/login", methods=["POST"])
 def login():
     data = request.get_json()
     username = data.get("username")
     password = data.get("password")
     account = Account.login(username, password)
+    print(username)
+    print(password)
+    print(account)
     if account:
         account.api_key = Account.random_api_key()
         account.save()
         return jsonify({"session_id": account.api_key,
                         "username": account.username})
     return jsonify({"session_id": None,
-                        "username": ""})
+                    "username": ""})
 
 @app.route("/covid/create", methods=["POST"])
 def create_user():
     data = request.get_json()
     key = Account.random_api_key()
-    new_account = Account(data.get("username"), data.get("password"), key, 
-                data.get("email"))
-    new_account.insert()
+    pass_hash = Account.hash_password(data.get("password"))
+    new_account = Account(data.get("username"), pass_hash, key, data.get("email"))
+    new_account._insert()
     return jsonify({"session_id": new_account.api_key,
                     "username": new_account.username})
                     

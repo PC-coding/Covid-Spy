@@ -1,11 +1,12 @@
 import sqlite3
 from hashlib import sha256
+import random
 
 class Account:
     tablename = 'accounts'
     dbpath = 'data/covid.db'
 
-    def __init__(self, username, password_hash, api_key, email, pk):
+    def __init__(self, username, password_hash, api_key, email, pk=None):
         self.username = username
         self.password_hash = password_hash
         self.api_key = api_key
@@ -37,10 +38,9 @@ class Account:
             cursor = conn.cursor()
             sql = f"""
             UPDATE {self.tablename} SET 
-                email=?,
                 api_key=?
             WHERE pk=?"""
-            cursor.execute(sql, (self.email, self.api_key, self.pk))
+            cursor.execute(sql, (self.api_key, self.pk))
 
     @classmethod
     def login(cls, username, password):

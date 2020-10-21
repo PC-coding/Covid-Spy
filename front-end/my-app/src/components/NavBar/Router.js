@@ -1,24 +1,21 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Login from '../LoginSignup/Login';
 import Signup from '../LoginSignup/Signup';
-import Map from '../Map/worldMap';
 import Graph from '../Graphs/Graphs';
 import Globe from '../Globe(Home)/Globe';
 import Tracker from '../Tracker/Tracker';
-import { TransitionGroup, CSSTransition } from "react-transition-group";
-import styled from "styled-components";
 
-const Router = ({ loggedIn, location }) => {
-    if (loggedIn) {
+const Router = ({ token, setToken}) => {
+    if (token) {
         return(
             <div>
                 <Route path='/' exact component={Globe} />
                 <Route path='/tracker'>
-                    <Tracker />
+                    <Tracker token={token} setToken={setToken}/>
                 </Route>
                 <Route path='/graphs'>
-                    <Graph loggedIn={loggedIn}/>
+                    <Graph token={token} setToken={setToken}/>
                 </Route>
             </div>
         )
@@ -26,12 +23,12 @@ const Router = ({ loggedIn, location }) => {
         return(
             <div>
                 <Route path='/login'> 
-                    <Login loggedIn={loggedIn}/>
+                    <Login token={token} setToken={setToken}/>
                 </Route>
                 <Route path='/signup'>
-                    <Signup loggedIn={loggedIn}/>
+                    <Signup token={token} setToken={setToken}/>
                 </Route>
-                <Route path='/' exact component={Globe} />
+                <Route path='/' exact component={Globe}/>
                 <Route path='/tracker'>
                     <Tracker />
                 </Route>

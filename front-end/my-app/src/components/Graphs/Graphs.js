@@ -1,38 +1,19 @@
 import React,{  useState, useEffect  } from 'react';
-import { MenuItem, FormControl, Select, Card, CardContent } from '@material-ui/core';
+import { Card, CardContent } from '@material-ui/core';
 import Table from '../Table/Table.js';
 import LineGraph from '../Graphs/LineGraph.js';
 import { sortData, prettyPrintStat } from '../util.js';
 import InfoBox from '../InfoBox/InfoBox.js';
-
-
-
-// export default function Graph(){
-//     return(
-//         <div className='graphApp'>
-//             <h1>testing tracker</h1>
-//             <FormControl className='graph_dropdown'>
-//                 <Select variant='outlined' value='ab'>
-//                     <MenuItem value='Continents'>Continents</MenuItem>
-//                     <MenuItem value='Countries'>Countries</MenuItem>
-//                     <MenuItem value='States'>States</MenuItem>
-//                     <MenuItem value='Counties'>Counties</MenuItem>
-//                 </Select>
-//             </FormControl>
-//         </div>
-//     )
-// }
 
 export default function Graph(){
     const [countries, setCountries] = useState([]);
     const [country, setCountry] = useState('worldwide');
     const [countryInfo, setCountryInfo] = useState({});
     const [tableData, setTableData] = useState([]);
-    const [mapCenter, setMapCenter] = useState({
-                                                  lat: 34.80746,
-                                                  lng: -40.4796
-                                              });
-    const [mapZoom, setMapZoom] = useState(4);
+    // const [mapCenter, setMapCenter] = useState({
+    //                                               lat: 34.80746,
+    //                                               lng: -40.4796
+    //                                           });
     const [mapCountries, setMapCountries] = useState([]);
     const [casesType, setCasesType] = useState("cases");
 
@@ -64,27 +45,24 @@ export default function Graph(){
     getCountriesData();
     }, [])
 
-    const onCountryChange = async (e) => {
-    const countryCode = e.target.value
-    setCountry(countryCode);
+    // const onCountryChange = async (e) => {
+    // const countryCode = e.target.value
+    // setCountry(countryCode);
 
-    const url = countryCode === 'worldwide' 
-        ? 'https://disease.sh/v3/covid-19/all' 
-    //   : `https://localhost:5000/covid/save_country/${countryCode}`
-        : `https://disease.sh/v3/covid-19/countries/${countryCode}`
-    await fetch(url)
-    .then(resp => resp.json())
-    .then(data => {
-        setCountry(countryCode); 
-        setCountryInfo(data);
-
-        // setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-        // setMapZoom(4);
-        countryCode === "worldwide"
-            ? setMapCenter([34.80746, -40.4796])
-            : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-    })
-    }
+    // const url = countryCode === 'worldwide' 
+    //     ? 'https://disease.sh/v3/covid-19/all' 
+    // //   : `https://localhost:5000/covid/save_country/${countryCode}`
+    //     : `https://disease.sh/v3/covid-19/countries/${countryCode}`
+    // await fetch(url)
+    // .then(resp => resp.json())
+    // .then(data => {
+    //     setCountry(countryCode); 
+    //     setCountryInfo(data);
+    //     countryCode === "worldwide"
+    //         ? setMapCenter([34.80746, -40.4796])
+    //         : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+    // })
+    // }
 
     
    return(

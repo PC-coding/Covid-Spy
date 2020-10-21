@@ -11,11 +11,7 @@ def schema(dbpath="covid.db"):
             positive_cases INTEGER,
             recovered_cases INTEGER,
             mortality_rate INTEGER,
-            total_cases INTEGER,
-            iso2 VARCHAR,
-            lat INTEGER,
-            long INTEGER,
-            flag VARCHAR
+            total_cases INTEGER
         );""")
 
         cursor.execute("""
@@ -25,11 +21,7 @@ def schema(dbpath="covid.db"):
             positive_cases INTEGER,
             recovered_cases INTEGER, 
             mortality_rate INTEGER, 
-            total_cases INTEGER,
-            iso2 VARCHAR,
-            lat INTEGER,
-            long INTEGER,
-            flag VARCHAR
+            total_cases INTEGER
         );""")
 
         cursor.execute("""
@@ -39,9 +31,7 @@ def schema(dbpath="covid.db"):
             positive_cases INTEGER,
             recovered_cases INTEGER, 
             mortality_rate INTEGER, 
-            total_cases INTEGER,
-            lat INTEGER,
-            long INTEGER,
+            total_cases INTEGER
         );""")
 
         cursor.execute("""

@@ -6,14 +6,15 @@ import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [token, setToken] = useState("");
   // const [loggedIn, setLoggedIn] = useState(true);
 
   return (
   <BrowserRouter>
         <div className="app"> 
           <header className="App-header">
-            <NavBar loggedIn={loggedIn} />
-            <Router loggedIn={loggedIn} />
+            <NavBar token={token} setToken={setToken} />
+            <Router token={token} setToken={setToken}/>
           </header>
         </div>
     </BrowserRouter>
