@@ -5,43 +5,34 @@ def schema(dbpath="covid.db"):
         cursor = conn.cursor()
 
         cursor.execute("""
-        CREATE TABLE covid_data_continents (
-            time_stamp INTEGER,
-            continent_name VARCHAR, 
-            positive_cases INTEGER,
-            recovered_cases INTEGER,
-            mortality_rate INTEGER,
-            total_cases INTEGER
-        );""")
-
-        cursor.execute("""
         CREATE TABLE covid_data_countries (
-            time_stamp INTEGER,
-            country_name VARCHAR,
-            positive_cases INTEGER,
-            recovered_cases INTEGER, 
-            mortality_rate INTEGER, 
-            total_cases INTEGER
+            updated INTEGER,
+            country VARCHAR,
+            active INTEGER,
+            cases INTEGER,
+            todayCases INTEGER,
+            recovered INTEGER, 
+            todayRecovered INTEGER,
+            deaths INTEGER, 
+            todayDeaths INTEGER,
+            iso2 INTEGER,
+            lat INTEGER,
+            long INTEGER,
+            flag VARCHAR
         );""")
 
         cursor.execute("""
         CREATE TABLE covid_data_states (
-            time_stamp INTEGER,
-            state_name VARCHAR,
-            positive_cases INTEGER,
-            recovered_cases INTEGER, 
-            mortality_rate INTEGER, 
-            total_cases INTEGER
-        );""")
-
-        cursor.execute("""
-        CREATE TABLE covid_data_counties (
-            time_stamp INTEGER,
-            county_name VARCHAR,
-            positive_cases INTEGER,
-            recovered_cases INTEGER, 
-            mortality_rate INTEGER, 
-            total_cases INTEGER 
+            updated INTEGER,
+            state VARCHAR,
+            active INTEGER,
+            cases INTEGER,
+            todayCases INTEGER,
+            recovered INTEGER, 
+            deaths INTEGER, 
+            todayDeaths INTEGER,
+            lat INTEGER,
+            long INTEGER
         );""")
 
         cursor.execute("""
@@ -57,10 +48,8 @@ def schema(dbpath="covid.db"):
         CREATE TABLE favorites(
             time_stamp INTEGER,
             account_pk INTEGER,
-            county_name VARCHAR,
             state_name VARCHAR,
-            country_name VARCHAR,
-            continent_name VARCHAR
+            country_name VARCHAR
         );""")
 
 if __name__ == "__main__":

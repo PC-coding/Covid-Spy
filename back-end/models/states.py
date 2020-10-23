@@ -4,53 +4,62 @@ class States:
     tablename = 'covid_data_states'
     dbpath = 'data/covid.db'
 
-    def __init__(self, time_stamp, state_name, positive_cases=0, recovered_cases=0, 
-                mortality_rate=0, total_cases=0):
-        self.time_stamp = time_stamp
-        self.state_name = state_name
-        self.positive_cases = positive_cases
-        self.recovered_cases = recovered_cases
-        self.mortality_rate = mortality_rate
-        self.total_cases = total_cases
-    
+    def __init__(self, updated, state, active, cases, todayCases, 
+                recovered, deaths, todayDeaths, lat, long):
+        self.updated = updated
+        self.state = state
+        self.active = active       
+        self.cases = cases
+        self.todayCases = todayCases
+        self.recovered = recovered
+        self.deaths = deaths, 
+        self.todayDeaths = todayDeaths, 
+        self.lat = lat,
+        self.long = long
+        
     def save(self):
         with sqlite3.connect(self.dbpath) as conn:        
             cursor = conn.cursor()
             sql = f"""
             INSERT INTO {self.tablename} (
-                time_stamp,
-                state_name,
-                positive_cases,
-                recovered_cases,
-                mortality_rate,
-                total_cases
-            ) VALUES (?,?,?,?,?,?)"""
-            values = (self.time_stamp, self.state_name, self.positive_cases, 
-                    self.recovered_cases, self.mortality_rate, self.total_cases)
+                updated,
+                state,
+                active                
+                cases,
+                todayCases,
+                recovered,
+                deaths, 
+                todayDeaths, 
+                lat, 
+                long)
+                VALUES (?,?,?,?,?,?,?,?,?,?)"""
+            values = (self.updated, self.state, self.active, self.cases, 
+                    self.todayCases, self.recovered, self.deaths, self.todayDeaths, 
+                    self.lat, self.long)            
             cursor.execute(sql, values)
             return True
         return False
 
     @classmethod
-    def select_state(cls, state_name, time_stamp):
+    def select_state(cls, state, updated):
         with sqlite3.connect(cls.dbpath) as conn:
             cursor = conn.cursor()
             sql= f"""
-            SELECT * FROM {cls.tablename} WHERE state_name =?, time_stamp =?
+            SELECT * FROM {cls.tablename} WHERE state =?, updated =?
             ;"""
-            values = (state_name, time_stamp,)
+            values = (cls.state, cls.updated,)
             cursor.execute(sql, values)
             return cursor.fetchall()
         return False
 
     @classmethod
-    def select_all_states(cls, time_stamp):
+    def select_all_states(cls, updated):
         with sqlite3.connect(cls.dbpath) as conn:
             cursor = conn.cursor()
             sql = f"""
-            SELECT * FROM {cls.tablename} WHERE time_stamp =?
+            SELECT * FROM {cls.tablename} WHERE updated =?
             ;"""
-            cursor.execute(sql, (time_stamp,))
+            cursor.execute(sql, (cls.updated,))
             return cursor.fetchall()
         return []
     

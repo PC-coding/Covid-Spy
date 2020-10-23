@@ -3,8 +3,6 @@ import { MenuItem, FormControl, Select } from "@material-ui/core";
 import './Tracker.css';
 import InfoBox from '../InfoBox/InfoBox.js';
 import Map from '../Map/map.js';
-// import Table from '../Table/Table.js';
-// import LineGraph from '../Graphs/LineGraph.js';
 import { sortData, prettyPrintStat } from '../util.js';
 import "leaflet/dist/leaflet.css";
 
@@ -86,6 +84,11 @@ function Tracker() {
                 ))
               }
             </Select> 
+          </FormControl>
+          <FormControl className='app_dropdown1'>
+              <Select variant='outlined'>
+                <MenuItem value='states' style={{color:'black'}}>States</MenuItem>
+              </Select>
           </FormControl>
         </div>
 

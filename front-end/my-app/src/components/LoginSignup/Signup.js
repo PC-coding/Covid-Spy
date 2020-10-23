@@ -24,6 +24,7 @@ export default function Signup( { token, setToken } ) {
 
     return(
         <div className='signup'>
+            <br></br>
             <h1>Sign Up!</h1>
             <br></br>
             <input onChange={e => setUsername(e.target.value)} type='text' name='username' id='user' placeholder='Desired username'></input>

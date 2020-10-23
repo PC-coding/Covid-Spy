@@ -12,7 +12,8 @@ const NavBar = ({ token, setToken }) => {
                 </Link>
                 <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/tracker'>Map-Tracker</Link>
                 <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/graphs'>Graphs</Link>
-                <Redirect from='/' to='/graphs' />
+                <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/user'>Account</Link>
+                <Redirect from='/' to='/user' />
             </nav>
         )
     } else {

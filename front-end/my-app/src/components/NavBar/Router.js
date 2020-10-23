@@ -5,6 +5,7 @@ import Signup from '../LoginSignup/Signup';
 import Graph from '../Graphs/Graphs';
 import Globe from '../Globe(Home)/Globe';
 import Tracker from '../Tracker/Tracker';
+import User from '../AboutMe/About';
 
 const Router = ({ token, setToken}) => {
     if (token) {
@@ -16,6 +17,9 @@ const Router = ({ token, setToken}) => {
                 </Route>
                 <Route path='/graphs'>
                     <Graph token={token} setToken={setToken}/>
+                </Route>
+                <Route path ='/user'>
+                    <User token={token} setToken={setToken} />
                 </Route>
             </div>
         )

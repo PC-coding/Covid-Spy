@@ -49,55 +49,49 @@ def create_user():
                     
 
 
-#search by single location and time_stamp
-@app.route('/covid/continent/<continent_name>/<time_stamp>', methods=['GET'])
-def search_by_continent(continent_name, time_stamp):
-    name = Continents.select_continent(continent_name, time_stamp)
-    return jsonify({'Continent': name})
+#search by single location and updated
+# @app.route('/covid/continent/<continent_name>/<updated>', methods=['GET'])
+# def search_by_continent(continent_name, updated):
+#     name = Continents.select_continent(continent_name, updated)
+#     return jsonify({'Continent': name})
 
-@app.route('/covid/country/<country_name>/<time_stamp>', methods=['GET'])
-def search_by_country(country_name, time_stamp):
-    # data = requests.get(API_BASE).json()
-    # name = Countries.select_country(country_name, time_stamp)
-    # name = Countries(data.get('country_name'), data.get('time_stamp'))
-    country = Countries.select_country(country_name, time_stamp)
+@app.route('/covid/country/<country>', methods=['GET'])
+def search_by_country(country):
+    country = Countries.select_country(country)
     return jsonify({'Country': country})
 
-@app.route('/covid/state/<state_name>/<time_stamp>', methods=['GET'])
-def search_by_state(state_name, time_stamp):
-    name = States.select_state(state_name, time_stamp)
+@app.route('/covid/state/<state>', methods=['GET'])
+def search_by_state(state):
+    name = States.select_state(state)
     return jsonify({'State': name})
 
-@app.route('/covid/county/<county_name>/<time_stamp>', methods=['GET'])
-def search_by_county(county_name, time_stamp):
-    name = Counties.select_county(county_name, time_stamp)
-    return jsonify({'County': name})
+# @app.route('/covid/county/<county_name>/<updated>', methods=['GET'])
+# def search_by_county(county_name, updated):
+#     name = Counties.select_county(county_name, updated)
+#     return jsonify({'County': name})
 
 
 
-#search by all locations on a certain time_stamp
-@app.route('/covid/continents/<time_stamp>', methods=['GET'])
-def search_by_all_continents(time_stamp):
-    name = Continents.select_all_continents(time_stamp)
-    return jsonify({'Continent': name})
+#search by all locations on a certain updated
+# @app.route('/covid/continents/<updated>', methods=['GET'])
+# def search_by_all_continents(updated):
+#     name = Continents.select_all_continents(updated)
+#     return jsonify({'Continent': name})
 
-@app.route('/covid/countries/<time_stamp>', methods=['GET'])
-def search_by_all_countries(time_stamp):
-    # countries = requests.get(API_BASE).json()
-    # print(countries)
-    country = Countries.select_all_countries(time_stamp)
-    # country = countries.save
+@app.route('/covid/countries/', methods=['GET'])
+def search_by_all_countries():
+    country = Countries.select_all_countries()
     return jsonify({'Country': country})
 
-@app.route('/covid/states/<time_stamp>', methods=['GET'])
-def search_by_all_states(time_stamp):
-    name = States.select_all_states(time_stamp)
+@app.route('/covid/states/', methods=['GET'])
+def search_by_all_states():
+    name = States.select_all_states()
     return jsonify({'State': name})
 
-@app.route('/covid/counties/<time_stamp>', methods=['GET'])
-def search_by_all_counties(time_stamp):
-    name = Counties.select_all_counties(time_stamp)
-    return jsonify({'County': name})
+# @app.route('/covid/counties/<updated>', methods=['GET'])
+# def search_by_all_counties(updated):
+#     name = Counties.select_all_counties(updated)
+#     return jsonify({'County': name})
 
 
 
@@ -106,21 +100,33 @@ def search_by_all_counties(time_stamp):
 # def save_continents():
 #     return jsonify
 
-@app.route('/covid/save_country/', methods=['GET'])
+@app.route('/covid/save_country', methods=['GET'])
 def save_countries():
     countries = requests.get(API_BASE).json()
     # print(countries)
     for country in countries:
-        new_data = Countries(country.get('updated'), country.get('country'), country.get('active'), 
-                        country.get('recovered'), country.get('deaths'), 
-                        country.get('cases'), country.get('iso2'), country.get('lat'),
-                        country.get('long'), country.get('flag'))
+        new_data = Countries(country.get('updated'), country.get('country'), 
+                            country.get('active'), country.get('cases'), 
+                            country.get('todayCases'), country.get('recovered'), 
+                            country.get('todayRecovered'), country.get('deaths'), 
+                            country.get('todayDeaths'), 
+                            country.get('countryInfo')['iso2'], 
+                            country.get('countryInfo')['lat'], 
+                            country.get('countryInfo')['long'], 
+                            country.get('countryInfo')['flag'])
         new_data.save()
     return jsonify({'Country': countries})
 
 # @app.route('/covid/save_state', methods=['GET'])
 # def save_states():
-#     return jsonify
+#     states = requests.get(API_BASE1).json()
+#     for state in states:
+#         new_data = States(state.get('updated'), state.get('state'), 
+#                         state.get('active'), state.get('cases'), 
+#                         state.get('todayCases'), state.get('recovered'),
+#                         state.get('deaths'), state.get('todayDeaths'))
+#         new_data.save()
+#     return jsonify('State': states)
 
 # @app.route('/covid/save_county', methods=['GET'])
 # def save_counties():

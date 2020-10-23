@@ -5,9 +5,7 @@ import Router from './NavBar/Router';
 import { BrowserRouter } from 'react-router-dom';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
   const [token, setToken] = useState("");
-  // const [loggedIn, setLoggedIn] = useState(true);
 
   return (
   <BrowserRouter>

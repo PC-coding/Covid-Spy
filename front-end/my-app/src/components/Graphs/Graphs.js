@@ -10,10 +10,6 @@ export default function Graph(){
     const [country, setCountry] = useState('worldwide');
     const [countryInfo, setCountryInfo] = useState({});
     const [tableData, setTableData] = useState([]);
-    // const [mapCenter, setMapCenter] = useState({
-    //                                               lat: 34.80746,
-    //                                               lng: -40.4796
-    //                                           });
     const [mapCountries, setMapCountries] = useState([]);
     const [casesType, setCasesType] = useState("cases");
 
@@ -45,26 +41,6 @@ export default function Graph(){
     getCountriesData();
     }, [])
 
-    // const onCountryChange = async (e) => {
-    // const countryCode = e.target.value
-    // setCountry(countryCode);
-
-    // const url = countryCode === 'worldwide' 
-    //     ? 'https://disease.sh/v3/covid-19/all' 
-    // //   : `https://localhost:5000/covid/save_country/${countryCode}`
-    //     : `https://disease.sh/v3/covid-19/countries/${countryCode}`
-    // await fetch(url)
-    // .then(resp => resp.json())
-    // .then(data => {
-    //     setCountry(countryCode); 
-    //     setCountryInfo(data);
-    //     countryCode === "worldwide"
-    //         ? setMapCenter([34.80746, -40.4796])
-    //         : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-    // })
-    // }
-
-    
    return(
         <Card className="app_right">
         <div className="app_stats">
