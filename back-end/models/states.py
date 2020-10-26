@@ -5,18 +5,18 @@ class States:
     dbpath = 'data/covid.db'
 
     def __init__(self, updated, state, active, cases, todayCases, 
-                recovered, deaths, todayDeaths, lat, long):
+                recovered, deaths, todayDeaths):
         self.updated = updated
         self.state = state
         self.active = active       
         self.cases = cases
         self.todayCases = todayCases
         self.recovered = recovered
-        self.deaths = deaths, 
-        self.todayDeaths = todayDeaths, 
-        self.lat = lat,
-        self.long = long
-        
+        self.deaths = deaths
+        self.todayDeaths = todayDeaths
+        # self.lat = lat
+        # self.long = long
+
     def save(self):
         with sqlite3.connect(self.dbpath) as conn:        
             cursor = conn.cursor()
@@ -24,30 +24,28 @@ class States:
             INSERT INTO {self.tablename} (
                 updated,
                 state,
-                active                
+                active,
                 cases,
                 todayCases,
                 recovered,
-                deaths, 
-                todayDeaths, 
-                lat, 
-                long)
-                VALUES (?,?,?,?,?,?,?,?,?,?)"""
-            values = (self.updated, self.state, self.active, self.cases, 
-                    self.todayCases, self.recovered, self.deaths, self.todayDeaths, 
-                    self.lat, self.long)            
+                deaths,
+                todayDeaths
+            ) VALUES (?,?,?,?,?,?,?,?)"""
+            values = (self.updated, self.state, self.active, 
+                    self.cases, self.todayCases, self.recovered, 
+                    self.deaths, self.todayDeaths)
             cursor.execute(sql, values)
             return True
         return False
-
+    
     @classmethod
     def select_state(cls, state, updated):
         with sqlite3.connect(cls.dbpath) as conn:
             cursor = conn.cursor()
             sql= f"""
-            SELECT * FROM {cls.tablename} WHERE state =?, updated =?
+            SELECT * FROM {cls.tablename} WHERE state =?
             ;"""
-            values = (cls.state, cls.updated,)
+            values = (state,)
             cursor.execute(sql, values)
             return cursor.fetchall()
         return False
@@ -57,9 +55,9 @@ class States:
         with sqlite3.connect(cls.dbpath) as conn:
             cursor = conn.cursor()
             sql = f"""
-            SELECT * FROM {cls.tablename} WHERE updated =?
+            SELECT * FROM {cls.tablename}
             ;"""
-            cursor.execute(sql, (cls.updated,))
+            cursor.execute(sql)
             return cursor.fetchall()
         return []
     

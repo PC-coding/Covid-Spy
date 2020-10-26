@@ -42,6 +42,11 @@
     justify-content: space-between;
   }
   
+  .app_stats1 {
+    display: flex;
+    justify-content: space-between;
+  }
+  
   .app_right {
     display: flex;
     flex-direction: column;

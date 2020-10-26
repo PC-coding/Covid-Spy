@@ -90,6 +90,27 @@
   }
 }
 
+nav {
+  /* position: fixed; */
+  right: 0;
+  left: 0;
+  top: 0;
+  /* z-index: 1030;  */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background: black;
+}
+
+.nav-links {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+}
+
 .App-header {
   display: flex;
   flex-direction: column;

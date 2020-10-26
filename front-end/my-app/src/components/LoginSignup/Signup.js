@@ -37,7 +37,7 @@ export default function Signup( { token, setToken } ) {
             <br></br>
             <Link style={{color:'white', textDecoration:'none'}} to="/login">Existing user? Login here!</Link>
             <br></br>
-            <button onClick={sendSignup}>Complete</button>
+            <button style={{color:'white', backgroundColor:'black', fontWeight:'bold', blockSize: 35}} onClick={sendSignup}>Complete</button>
             <br></br>
         </div>
     )

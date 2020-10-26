@@ -8,11 +8,13 @@ from models.account import Account
 import requests
 
 API_BASE = 'https://disease.sh/v3/covid-19/countries'
+API_BASE1= 'https://disease.sh/v3/covid-19/states'
 
 app = Flask(__name__)
 CORS(app)
 
 #checking to see if localhost works
+
 @app.route('/', methods=['GET'])
 def hi():
     return 'hi'
@@ -20,6 +22,7 @@ def hi():
 
 
 #user routes
+
 @app.route("/covid/login", methods=["POST"])
 def login():
     data = request.get_json()
@@ -46,10 +49,19 @@ def create_user():
     new_account._insert()
     return jsonify({"session_id": new_account.api_key,
                     "username": new_account.username})
+
+@app.route("/covid/getUserInfo", methods=["POST"])
+def getUsername():
+    user = Account.api_authenticate(token)
+    if not user:
+        return jsonify({"user": []})
+    username = user.get_username()
+    return jsonify({"username": username})
                     
 
 
 #search by single location and updated
+
 # @app.route('/covid/continent/<continent_name>/<updated>', methods=['GET'])
 # def search_by_continent(continent_name, updated):
 #     name = Continents.select_continent(continent_name, updated)
@@ -73,6 +85,7 @@ def search_by_state(state):
 
 
 #search by all locations on a certain updated
+
 # @app.route('/covid/continents/<updated>', methods=['GET'])
 # def search_by_all_continents(updated):
 #     name = Continents.select_all_continents(updated)
@@ -117,16 +130,16 @@ def save_countries():
         new_data.save()
     return jsonify({'Country': countries})
 
-# @app.route('/covid/save_state', methods=['GET'])
-# def save_states():
-#     states = requests.get(API_BASE1).json()
-#     for state in states:
-#         new_data = States(state.get('updated'), state.get('state'), 
-#                         state.get('active'), state.get('cases'), 
-#                         state.get('todayCases'), state.get('recovered'),
-#                         state.get('deaths'), state.get('todayDeaths'))
-#         new_data.save()
-#     return jsonify('State': states)
+@app.route('/covid/save_state', methods=['GET'])
+def save_states():
+    states = requests.get(API_BASE1).json()
+    for state in states:
+        new_data = States(state.get('updated'), state.get('state'), 
+                        state.get('active'), state.get('cases'), 
+                        state.get('todayCases'), state.get('recovered'),
+                        state.get('deaths'), state.get('todayDeaths'))
+        new_data.save()
+    return jsonify({'State': states})
 
 # @app.route('/covid/save_county', methods=['GET'])
 # def save_counties():

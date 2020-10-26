@@ -8,6 +8,7 @@ import "leaflet/dist/leaflet.css";
 
 
 function Tracker() {
+    // countries state
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState('worldwide');
   const [countryInfo, setCountryInfo] = useState({});
@@ -21,6 +22,18 @@ function Tracker() {
   const [casesType, setCasesType] = useState("cases");
 
 
+    // U.S states state
+  const [states, setStates] = useState([]);
+  const [state, setState] = useState('states');
+  const [stateInfo, setStateInfo] = useState({});
+  const [mapStateCenter, setMapStateCenter] = useState({
+                                                        lat: 40.1345916,
+                                                        lng: -102.0903563
+                                                        });
+  const [mapStateZoom, setMapStateZoom] = useState(4);
+  const [mapStates, setMapStates] = useState([]);
+
+
   useEffect(() => {
     fetch('https://disease.sh/v3/covid-19/all')
     .then(resp => resp.json())
@@ -29,10 +42,41 @@ function Tracker() {
     })
   }, [])
 
+//   useEffect(() => {
+//       const getStatesData = async () => {
+//           await fetch('https://disease.sh/v3/covid-19/states')
+//           .then(response => response.json())
+//           .then(data => {
+//               const states = data.map(state=> ({
+//                   name: state.state,
+//                   value: state.state
+//               }));
+//           })
+//       }
+//       getStatesData()
+//   }, [])
+
+//   const onStateChange = async (e) => {
+//     const stateCode = e.target.value
+//     setState(stateCode);
+
+//     const url = stateCode === 'states' 
+//       ? 'https://disease.sh/v3/covid-19/all' 
+//       : `https://disease.sh/v3/covid-19/states/${stateCode}`
+//     await fetch(url)
+//     .then(resp => resp.json())
+//     .then(data => {
+//       setState(stateCode); 
+//       setStateInfo(data);
+//       stateCode === "states"
+//           ? setMapCenter([40.1345916, -102.0903563])
+//           : setMapCenter([data.lat, data.long]);
+//     })
+//   }
+
   useEffect(() => {
     const getCountriesData = async () => {
       await fetch("https://disease.sh/v3/covid-19/countries")
-    //   await fetch("https://localhost:5000/covid/save_country/")
       .then(response => response.json())
       .then(data => {
         const countries = data.map(country => ({
@@ -55,7 +99,6 @@ function Tracker() {
 
     const url = countryCode === 'worldwide' 
       ? 'https://disease.sh/v3/covid-19/all' 
-    //   : `https://localhost:5000/covid/save_country/${countryCode}`
       : `https://disease.sh/v3/covid-19/countries/${countryCode}`
     await fetch(url)
     .then(resp => resp.json())
@@ -63,8 +106,6 @@ function Tracker() {
       setCountry(countryCode); 
       setCountryInfo(data);
 
-      // setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-      // setMapZoom(4);
       countryCode === "worldwide"
           ? setMapCenter([34.80746, -40.4796])
           : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
@@ -85,11 +126,14 @@ function Tracker() {
               }
             </Select> 
           </FormControl>
-          <FormControl className='app_dropdown1'>
-              <Select variant='outlined'>
+          {/* <FormControl className='app_dropdown1'>
+              <Select variant='outlined' value={state} onChange={onStateChange}>
                 <MenuItem value='states' style={{color:'black'}}>States</MenuItem>
+                {states.map(state => (
+                    <MenuItem value='states' style={{color:'black'}}>States</MenuItem>
+                ))}
               </Select>
-          </FormControl>
+          </FormControl> */}
         </div>
 
         <div className="app_stats">
@@ -107,6 +151,22 @@ function Tracker() {
 
         </div>
 
+        {/* <div className="app_stats1">
+          <InfoBox active={casesType === "cases"} onClick={e => setCasesType('cases')} 
+                    title="Positive Cases" cases={prettyPrintStat(stateInfo.todayCases)} 
+                    total={prettyPrintStat(stateInfo.cases)}/>
+
+          <InfoBox active={casesType === "deaths"} onClick={e => setCasesType('deaths')} 
+                    title="Mortality Rate" cases={prettyPrintStat(stateInfo.todayDeaths)} 
+                    total={prettyPrintStat(stateInfo.deaths)}/>
+
+          <InfoBox active={casesType === "recovered"} onClick={e => setCasesType('recovered')} 
+                    title="Recovered" cases={prettyPrintStat(stateInfo.todayRecovered)} 
+                    total={prettyPrintStat(stateInfo.recovered)}/>
+
+        </div>
+
+        <Map casesType={casesType} states={mapStates} center ={mapStateCenter} zoom={mapStateZoom} /> */}
         <Map casesType={casesType} countries={mapCountries} center={mapCenter} zoom={mapZoom}/>
       </div> 
     </div>

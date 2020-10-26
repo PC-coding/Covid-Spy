@@ -17,6 +17,7 @@ export default function Login( { token, setToken } ) {
     const response = await fetch('http://localhost:5000/covid/login', configs);
     const data = await response.json();
     console.log(data);
+    sessionStorage.setItem('token', data.session_id)
     setToken(data.session_id);
     }
 
@@ -29,7 +30,7 @@ export default function Login( { token, setToken } ) {
           <input onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" /><br/>
           <Link style={{color:'white', textDecoration:'none'}} to="/signup">New user? Create an account here!</Link>
           <br></br>
-          <button onClick={sendLogin}>Login</button><br/>
+          <button style={{color:'white', backgroundColor:'black', fontWeight:'bold', blockSize: 35}} onClick={sendLogin}>Login</button><br/>
         </div>
         )
     }

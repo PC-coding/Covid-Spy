@@ -64,6 +64,15 @@ class Account:
             if account:
                 return Account(*account[:1], account[0])
             return None
+    
+    @classmethod
+    def get_username(cls, pk):
+        with sqlite3.connect(cls.dbpath) as conn:
+            cursor = conn.cursor()
+            cursor.execute(f"SELECT * FROM {cls.tablename} WHERE pk=?", pk) 
+            return cursor.fetchall()
+        return []
+
 
     @staticmethod
     def hash_password(password):

@@ -41,15 +41,15 @@ def schema(dbpath="covid.db"):
             username VARCHAR(11) UNIQUE NOT NULL,
             password_hash VARCHAR(128),
             api_key VARCHAR,
-            email VARCHAR
+            email VARCHAR,
         );""")
 
         cursor.execute("""
         CREATE TABLE favorites(
-            time_stamp INTEGER,
+            updated INTEGER,
             account_pk INTEGER,
-            state_name VARCHAR,
-            country_name VARCHAR
+            state VARCHAR,
+            country VARCHAR
         );""")
 
 if __name__ == "__main__":
