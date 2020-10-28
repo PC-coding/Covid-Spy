@@ -5,7 +5,8 @@ import Signup from '../LoginSignup/Signup';
 import Graph from '../Graphs/Graphs';
 import Globe from '../Globe(Home)/Globe';
 import Tracker from '../Tracker/Tracker';
-import User from '../AboutMe/About';
+import User from '../Account/Account';
+import About from '../About/About';
 
 const Router = ({ token, setToken}) => {
     if (token) {
@@ -26,6 +27,9 @@ const Router = ({ token, setToken}) => {
     } else {
         return(
             <div>
+                <Route path='/about'>
+                    <About token={token} setToken={setToken} />
+                </Route>
                 <Route path='/login'> 
                     <Login token={token} setToken={setToken}/>
                 </Route>

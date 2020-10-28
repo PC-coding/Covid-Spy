@@ -1,8 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-export default function User( { token, username } ){
+export default function User( { token, username, favorites } ){
     const [userInfo, setUserInfo] = useState([]);
+
     useEffect(() => {
         const getUserInfo = async() => {
             const userToken = JSON.stringify({'token': token})
@@ -17,11 +18,13 @@ export default function User( { token, username } ){
         }
         getUserInfo();
      }, [])
+
     return(
         <div>
             <br></br>
             <h3> Welcome back, {username} </h3>
-            <p> Here are your favorites:</p>
+            <h4> Here are your favorites:</h4>
+            <p>{favorites}</p>
         </div>
     )
 }

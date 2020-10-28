@@ -13,10 +13,12 @@ const NavBar = ({ token, setToken }) => {
                 <Link to='/'> 
                     <img src={img} className='top-nav-icon' alt='icon' />
                 </Link>
-                <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/tracker'>Map-Tracker</Link>
-                <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/graphs'>Graphs</Link>
-                <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/user'>Account</Link>
-                <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/login' onClick={logOut} >Logout</Link>
+                <div>
+                    <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/tracker'>Map-Tracker</Link>
+                    <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/graphs'>Graphs</Link>
+                    <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/user'>Account</Link>
+                    <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/login' onClick={logOut} >Logout</Link>
+                </div>
                 <Redirect from='/' to='/user' />
             </nav>
         )
@@ -26,8 +28,11 @@ const NavBar = ({ token, setToken }) => {
                 <Link to='/'> 
                     <img src={img} className='top-nav-icon' alt='icon' />
                 </Link>
-                <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/login'>Login</Link>
-                <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/signup'>Signup</Link>
+                <div className="justify-content-end nav" justify="true">
+                    <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/about'>About</Link>
+                    <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/login'>Login</Link>
+                    <Link style={{color:'white', fontWeight:'bold', textDecoration:'none', padding:20}} to='/signup'>Signup</Link>
+                </div>
             </nav>
         )
     }

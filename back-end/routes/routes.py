@@ -77,6 +77,19 @@ def search_by_state(state):
     name = States.select_state(state)
     return jsonify({'State': name})
 
+@app.route('/covid/state', methods=['POST'])
+def update_states():
+    data = request.get_json()
+    lat = data.get('lat')
+    long = data.get('long')
+    state = data.get('state')
+    print(lat,long)
+    # update = States.update(lat, long)
+    update_list = States(lat=lat, long=long, state=state)
+    update = update_list.update()
+    return jsonify({'Success': update})
+
+
 # @app.route('/covid/county/<county_name>/<updated>', methods=['GET'])
 # def search_by_county(county_name, updated):
 #     name = Counties.select_county(county_name, updated)
@@ -128,7 +141,7 @@ def save_countries():
                             country.get('countryInfo')['long'], 
                             country.get('countryInfo')['flag'])
         new_data.save()
-    return jsonify({'Country': countries})
+    return jsonify([{countries}])
 
 @app.route('/covid/save_state', methods=['GET'])
 def save_states():

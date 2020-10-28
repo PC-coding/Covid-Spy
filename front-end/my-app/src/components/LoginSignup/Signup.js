@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import img from '/Users/tappy/Byte/Phase_3_Project/front-end/my-app/src/components/images/userLogin.svg';
+
 
 
 export default function Signup( { token, setToken } ) {
@@ -26,6 +28,7 @@ export default function Signup( { token, setToken } ) {
         <div className='signup'>
             <br></br>
             <h1>Sign Up!</h1>
+            <img style={{height:'250px', width: '3000px'}} src={img} />
             <br></br>
             <input onChange={e => setUsername(e.target.value)} type='text' name='username' id='user' placeholder='Desired username'></input>
             <br></br>

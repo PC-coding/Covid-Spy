@@ -17,7 +17,7 @@ function Tracker() {
                                                 lat: 34.80746,
                                                 lng: -40.4796
                                             });
-  const [mapZoom, setMapZoom] = useState(4);
+  const [mapZoom, setMapZoom] = useState(3);
   const [mapCountries, setMapCountries] = useState([]);
   const [casesType, setCasesType] = useState("cases");
 
@@ -33,7 +33,7 @@ function Tracker() {
   const [mapStateZoom, setMapStateZoom] = useState(4);
   const [mapStates, setMapStates] = useState([]);
 
-
+// working 
   useEffect(() => {
     fetch('https://disease.sh/v3/covid-19/all')
     .then(resp => resp.json())
@@ -41,39 +41,7 @@ function Tracker() {
       setCountryInfo(data);
     })
   }, [])
-
-//   useEffect(() => {
-//       const getStatesData = async () => {
-//           await fetch('https://disease.sh/v3/covid-19/states')
-//           .then(response => response.json())
-//           .then(data => {
-//               const states = data.map(state=> ({
-//                   name: state.state,
-//                   value: state.state
-//               }));
-//           })
-//       }
-//       getStatesData()
-//   }, [])
-
-//   const onStateChange = async (e) => {
-//     const stateCode = e.target.value
-//     setState(stateCode);
-
-//     const url = stateCode === 'states' 
-//       ? 'https://disease.sh/v3/covid-19/all' 
-//       : `https://disease.sh/v3/covid-19/states/${stateCode}`
-//     await fetch(url)
-//     .then(resp => resp.json())
-//     .then(data => {
-//       setState(stateCode); 
-//       setStateInfo(data);
-//       stateCode === "states"
-//           ? setMapCenter([40.1345916, -102.0903563])
-//           : setMapCenter([data.lat, data.long]);
-//     })
-//   }
-
+  
   useEffect(() => {
     const getCountriesData = async () => {
       await fetch("https://disease.sh/v3/covid-19/countries")
@@ -112,6 +80,85 @@ function Tracker() {
     })
   }
 
+
+
+
+// *                     doesn't work yet, working on getting this to work                      *
+
+  // useEffect(() => {
+  //     const getStatesData = async () => {
+  //         await fetch('http://localhost:5000/covid/states/')
+  //         .then(response => response.json())
+  //         .then(data => {
+  //             const states = data.map(state=> ({
+  //                 name: state.state,
+  //                 value: state.state
+  //             }));
+  //             setMapStates(data);
+  //             setStates(countries);
+  //         })
+  //     }
+  //     getStatesData()
+  // }, [])
+
+  // const onStateChange = async (e) => {
+  //   const stateCode = e.target.value
+  //   setState(stateCode);
+
+  //   const url = stateCode === 'states' 
+  //     ? 'https://disease.sh/v3/covid-19/all' 
+  //     : `http://localhost:5000/covid/states/${stateCode}`
+  //   await fetch(url)
+  //   .then(resp => resp.json())
+  //   .then(data => {
+  //     setState(stateCode); 
+  //     setStateInfo(data);
+  //     stateCode === "states"
+  //         ? setMapCenter([40.1345916, -102.0903563])
+  //         : setMapCenter([data.lat, data.long]);
+  //   })
+  // }
+
+
+  // useEffect(() => {
+  //   const getCountriesData = async () => {
+  //     await fetch('https://localhost:5000/covid/countries')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       const countries = data.map(Country => ({
+  //         name: Country[1],
+  //         value: Country[9]
+  //       }));
+
+  //       const sortedData = sortData(data);
+  //       setTableData(sortedData);
+  //       setMapCountries(data);
+  //       setCountries(countries);
+  //     })
+  //   }
+  //   getCountriesData();
+  // }, [])
+
+  // const onCountryChange = async (e) => {
+  //   const countryCode = e.target.value
+  //   setCountry(countryCode);
+
+  //   const url = countryCode === 'worldwide' 
+  //     ? 'https://disease.sh/v3/covid-19/all' 
+  //     : `https://localhost:5000/covid/countries/${countryCode}`
+  //   await fetch(url)
+  //   .then(resp => resp.json())
+  //   .then(data => {
+  //     setCountry(countryCode); 
+  //     setCountryInfo(data);
+
+  //     countryCode === "worldwide"
+  //         ? setMapCenter([34.80746, -40.4796])
+  //         : setMapCenter([data['lat'], data['long']]);
+  //   })
+  // }
+
+
   return (
     <div className="app_main">
       <div className="app_left">
@@ -122,6 +169,7 @@ function Tracker() {
               <MenuItem value="worldwide">Worldwide</MenuItem>
               {countries.map(country => (
                 <MenuItem value={country.value}>{country.name}</MenuItem>
+                // <MenuItem value={Country.value}>{Country.name}</MenuItem>
                 ))
               }
             </Select> 
@@ -149,6 +197,20 @@ function Tracker() {
                     title="Recovered" cases={prettyPrintStat(countryInfo.todayRecovered)} 
                     total={prettyPrintStat(countryInfo.recovered)}/>
 
+
+          {/* working on InfoBox to work with backend */}
+          {/* <InfoBox active={casesType === "cases"} onClick={e => setCasesType('cases')} 
+                    title="Positive Cases" cases={prettyPrintStat(countryInfo['todayCases'])} 
+                    total={prettyPrintStat(countryInfo['cases'])}/>
+
+          <InfoBox active={casesType === "deaths"} onClick={e => setCasesType('deaths')} 
+                    title="Mortality Rate" cases={prettyPrintStat(countryInfo['todayDeaths'])} 
+                    total={prettyPrintStat(countryInfo['deaths'])}/>
+
+          <InfoBox active={casesType === "recovered"} onClick={e => setCasesType('recovered')} 
+                    title="Recovered" cases={prettyPrintStat(countryInfo['todayRecovered'])} 
+                    total={prettyPrintStat(countryInfo['recovered'])}/> */}
+
         </div>
 
         {/* <div className="app_stats1">
@@ -164,9 +226,9 @@ function Tracker() {
                     title="Recovered" cases={prettyPrintStat(stateInfo.todayRecovered)} 
                     total={prettyPrintStat(stateInfo.recovered)}/>
 
-        </div>
+        </div> */}
 
-        <Map casesType={casesType} states={mapStates} center ={mapStateCenter} zoom={mapStateZoom} /> */}
+        {/* <Map casesType={casesType} states={mapStates} center ={mapStateCenter} zoom={mapStateZoom} /> */}
         <Map casesType={casesType} countries={mapCountries} center={mapCenter} zoom={mapZoom}/>
       </div> 
     </div>

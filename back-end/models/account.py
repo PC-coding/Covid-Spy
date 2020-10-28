@@ -1,6 +1,7 @@
 import sqlite3
 from hashlib import sha256
 import random
+from .favorites import Favorites
 
 class Account:
     tablename = 'accounts'
@@ -41,6 +42,31 @@ class Account:
                 api_key=?
             WHERE pk=?"""
             cursor.execute(sql, (self.api_key, self.pk))
+    
+    def save_favorites(self):
+        with sqlite3.connect(self.dbpath) as conn:
+            cursor = conn.cursor()
+            sql = f"""
+            INSERT INTO favorites (
+                updated,
+                state,
+                country
+            ) VALUES (?,?,?)"""
+            values = (updated, state, country)
+            cursor.execute(sql, values)
+            return True
+        return False
+
+    def delete_favorites(self):
+        with sqlite3.connect(self.dbpath) as conn:
+            cursor = conn.cursor()
+            sql = f"""
+            DELETE FROM favorites WHERE updated=? OR state=? OR country=?
+            """
+            values = (updated, state, country)
+            cursor.execute(sql, values)
+            return True
+        return False
 
     @classmethod
     def login(cls, username, password):

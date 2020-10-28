@@ -16,8 +16,8 @@ def schema(dbpath="covid.db"):
             deaths INTEGER, 
             todayDeaths INTEGER,
             iso2 INTEGER,
-            lat INTEGER,
-            long INTEGER,
+            lat FLOAT,
+            long FLOAT,
             flag VARCHAR
         );""")
 
@@ -31,8 +31,8 @@ def schema(dbpath="covid.db"):
             recovered INTEGER, 
             deaths INTEGER, 
             todayDeaths INTEGER,
-            lat INTEGER,
-            long INTEGER
+            lat FLOAT,
+            long FLOAT
         );""")
 
         cursor.execute("""
@@ -41,7 +41,7 @@ def schema(dbpath="covid.db"):
             username VARCHAR(11) UNIQUE NOT NULL,
             password_hash VARCHAR(128),
             api_key VARCHAR,
-            email VARCHAR,
+            email VARCHAR
         );""")
 
         cursor.execute("""
