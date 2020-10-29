@@ -59,6 +59,15 @@ def getUsername():
     return jsonify({"username": username})
                     
 
+#favorites routes
+# @app.route("/covid/favorites", methods=[""])
+# def addFav():
+#     return jsonify({})
+
+# @app.route("/covid/unfavorite", methods=[""])
+# def removeFav():
+#     return jsonify({})                    
+
 
 #search by single location and updated
 
@@ -67,10 +76,11 @@ def getUsername():
 #     name = Continents.select_continent(continent_name, updated)
 #     return jsonify({'Continent': name})
 
-@app.route('/covid/country/<country>', methods=['GET'])
+@app.route('/covid/countries/<country>', methods=['GET'])
 def search_by_country(country):
-    country = Countries.select_country(country)
-    return jsonify({'Country': country})
+    countries = Countries.select_country(country)
+    # return jsonify([country.to_json() for country in countries])
+    return jsonify(countries.to_json())
 
 @app.route('/covid/state/<state>', methods=['GET'])
 def search_by_state(state):
@@ -106,8 +116,8 @@ def update_states():
 
 @app.route('/covid/countries/', methods=['GET'])
 def search_by_all_countries():
-    country = Countries.select_all_countries()
-    return jsonify({'Country': country})
+    countries = Countries.select_all_countries()
+    return jsonify([country.to_json() for country in countries])
 
 @app.route('/covid/states/', methods=['GET'])
 def search_by_all_states():
@@ -141,7 +151,7 @@ def save_countries():
                             country.get('countryInfo')['long'], 
                             country.get('countryInfo')['flag'])
         new_data.save()
-    return jsonify([{countries}])
+    return jsonify({'Country': countries})
 
 @app.route('/covid/save_state', methods=['GET'])
 def save_states():

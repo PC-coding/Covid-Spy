@@ -23,15 +23,15 @@ function Tracker() {
 
 
     // U.S states state
-  const [states, setStates] = useState([]);
-  const [state, setState] = useState('states');
-  const [stateInfo, setStateInfo] = useState({});
-  const [mapStateCenter, setMapStateCenter] = useState({
-                                                        lat: 40.1345916,
-                                                        lng: -102.0903563
-                                                        });
-  const [mapStateZoom, setMapStateZoom] = useState(4);
-  const [mapStates, setMapStates] = useState([]);
+  // const [states, setStates] = useState([]);
+  // const [state, setState] = useState('states');
+  // const [stateInfo, setStateInfo] = useState({});
+  // const [mapStateCenter, setMapStateCenter] = useState({
+  //                                                       lat: 40.1345916,
+  //                                                       lng: -102.0903563
+  //                                                       });
+  // const [mapStateZoom, setMapStateZoom] = useState(4);
+  // const [mapStates, setMapStates] = useState([]);
 
 // working 
   useEffect(() => {
@@ -42,43 +42,43 @@ function Tracker() {
     })
   }, [])
   
-  useEffect(() => {
-    const getCountriesData = async () => {
-      await fetch("https://disease.sh/v3/covid-19/countries")
-      .then(response => response.json())
-      .then(data => {
-        const countries = data.map(country => ({
-          name: country.country,
-          value: country.countryInfo.iso2
-        }));
+  // useEffect(() => {
+  //   const getCountriesData = async () => {
+  //     await fetch("https://disease.sh/v3/covid-19/countries")
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       const countries = data.map(country => ({
+  //         name: country.country,
+  //         value: country.countryInfo.iso2
+  //       }));
 
-        const sortedData = sortData(data);
-        setTableData(sortedData);
-        setMapCountries(data);
-        setCountries(countries);
-      })
-    }
-    getCountriesData();
-  }, [])
+  //       const sortedData = sortData(data);
+  //       setTableData(sortedData);
+  //       setMapCountries(data);
+  //       setCountries(countries);
+  //     })
+  //   }
+  //   getCountriesData();
+  // }, [])
 
-  const onCountryChange = async (e) => {
-    const countryCode = e.target.value
-    setCountry(countryCode);
+  // const onCountryChange = async (e) => {
+  //   const countryCode = e.target.value
+  //   setCountry(countryCode);
 
-    const url = countryCode === 'worldwide' 
-      ? 'https://disease.sh/v3/covid-19/all' 
-      : `https://disease.sh/v3/covid-19/countries/${countryCode}`
-    await fetch(url)
-    .then(resp => resp.json())
-    .then(data => {
-      setCountry(countryCode); 
-      setCountryInfo(data);
+  //   const url = countryCode === 'worldwide' 
+  //     ? 'https://disease.sh/v3/covid-19/all' 
+  //     : `https://disease.sh/v3/covid-19/countries/${countryCode}`
+  //   await fetch(url)
+  //   .then(resp => resp.json())
+  //   .then(data => {
+  //     setCountry(countryCode); 
+  //     setCountryInfo(data);
 
-      countryCode === "worldwide"
-          ? setMapCenter([34.80746, -40.4796])
-          : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-    })
-  }
+  //     countryCode === "worldwide"
+  //         ? setMapCenter([34.80746, -40.4796])
+  //         : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+  //   })
+  // }
 
 
 
@@ -120,43 +120,48 @@ function Tracker() {
   // }
 
 
-  // useEffect(() => {
-  //   const getCountriesData = async () => {
-  //     await fetch('https://localhost:5000/covid/countries')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       const countries = data.map(Country => ({
-  //         name: Country[1],
-  //         value: Country[9]
-  //       }));
+  useEffect(() => {
+    const getCountriesData = async () => {
+      await fetch("http://localhost:5000/covid/countries")
+      .then(response => response.json())
+      .then(data => {
+        const countries = data.map(country => ({
+          name: country.country,
+          value: country.iso2
+        }));
 
-  //       const sortedData = sortData(data);
-  //       setTableData(sortedData);
-  //       setMapCountries(data);
-  //       setCountries(countries);
-  //     })
-  //   }
-  //   getCountriesData();
-  // }, [])
+        const sortedData = sortData(data);
+        setTableData(sortedData);
+        setMapCountries(data);
+        setCountries(countries);
+      })
+    }
+    getCountriesData();
+  }, [])
 
-  // const onCountryChange = async (e) => {
-  //   const countryCode = e.target.value
-  //   setCountry(countryCode);
+  const onCountryChange = async (event) => {
+    console.log('================================');
+    const countryCode = event.target.value
+    console.log('================================');
+    console.log(countryCode);
+    setCountry(countryCode);
 
-  //   const url = countryCode === 'worldwide' 
-  //     ? 'https://disease.sh/v3/covid-19/all' 
-  //     : `https://localhost:5000/covid/countries/${countryCode}`
-  //   await fetch(url)
-  //   .then(resp => resp.json())
-  //   .then(data => {
-  //     setCountry(countryCode); 
-  //     setCountryInfo(data);
-
-  //     countryCode === "worldwide"
-  //         ? setMapCenter([34.80746, -40.4796])
-  //         : setMapCenter([data['lat'], data['long']]);
-  //   })
-  // }
+    const url = countryCode === 'worldwide' 
+      ? 'https://disease.sh/v3/covid-19/all' 
+      : `http://localhost:5000/covid/countries/${countryCode}`
+    
+    await fetch(url)
+    .then(resp => resp.json())
+    .then(data => {
+      console.log(data)
+      console.log(data.country)
+      setCountry(countryCode); 
+      setCountryInfo(data);
+      countryCode === "worldwide"
+          ? setMapCenter([34.80746, -40.4796])
+          : setMapCenter([data['lat'], data['long']]);
+    })
+  }
 
 
   return (
@@ -168,7 +173,7 @@ function Tracker() {
             <Select variant="outlined" value={country} onChange={onCountryChange}>
               <MenuItem value="worldwide">Worldwide</MenuItem>
               {countries.map(country => (
-                <MenuItem value={country.value}>{country.name}</MenuItem>
+                <MenuItem value={country.name}>{country.name}</MenuItem>
                 // <MenuItem value={Country.value}>{Country.name}</MenuItem>
                 ))
               }

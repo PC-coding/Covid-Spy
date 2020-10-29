@@ -48,11 +48,11 @@ class Account:
             cursor = conn.cursor()
             sql = f"""
             INSERT INTO favorites (
+                account_pk,
                 updated,
-                state,
                 country
             ) VALUES (?,?,?)"""
-            values = (updated, state, country)
+            values = (account_pk, updated, country)
             cursor.execute(sql, values)
             return True
         return False
@@ -61,9 +61,9 @@ class Account:
         with sqlite3.connect(self.dbpath) as conn:
             cursor = conn.cursor()
             sql = f"""
-            DELETE FROM favorites WHERE updated=? OR state=? OR country=?
+            DELETE FROM favorites WHERE updated=? OR country=?
             """
-            values = (updated, state, country)
+            values = (updated, country)
             cursor.execute(sql, values)
             return True
         return False

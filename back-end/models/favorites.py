@@ -11,17 +11,28 @@ class Favorites:
         self.state = state
         self.country = country
 
-    def save_fav(self, account_pk):
-        with sqlite3.connect(self.dbpath) as conn:
-            cursor = conn.cursor()
-            sql = f"""
-            INSERT INTO {self.tablename} (
-                updated,
-                state,
-                country,
-            ) VALUES (?,?,?)"""
-            values = (self.updated, self.state, 
-            self.country)
-            cursor.execute(sql, values)
-            return True
-        return False
+    # def save_fav(self, account_pk):
+    #     with sqlite3.connect(self.dbpath) as conn:
+    #         cursor = conn.cursor()
+    #         sql = f"""
+    #         INSERT INTO {self.tablename} (
+    #             updated,
+    #             state,
+    #             country,
+    #         ) VALUES (?,?,?)"""
+    #         values = (self.updated, self.state, 
+    #         self.country)
+    #         cursor.execute(sql, values)
+    #         return True
+    #     return False
+
+    # def remove_fav(self, account_pk):
+    #     with sqlite3.connect(self.dbpath) as conn:
+    #         cursor = conn.cursor()
+    #         sql = f"""
+    #         DELETE FROM {self.tablename} WHERE updated=?,state=?,country=?
+    #         """
+    #         values = (self.updated, self.state, self.country)
+    #         cursor.execute(sql, values)
+    #         return True
+    #     return False
