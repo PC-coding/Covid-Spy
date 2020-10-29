@@ -98,7 +98,7 @@ curl -X POST localhost:5000/covid/state -H 'Content-Type: application/json' -d '
 curl -X POST localhost:5000/covid/state -H 'Content-Type: application/json' -d '{"lat" : "46.965260", "long": "-109.533691", "state": "Montana"}'
  
 34
-curl -X POST localhost:5000/covid/state -H 'Content-Type: application/json' -d '{"lat" : "47.751076", "long": "-120.740135", "state": "Washington State"}'
+curl -X POST localhost:5000/covid/state -H 'Content-Type: application/json' -d '{"lat" : "47.751076", "long": "-120.740135", "state": "Washington"}'
  
 35
 curl -X POST localhost:5000/covid/state -H 'Content-Type: application/json' -d '{"lat" : "39.419220", "long": "-111.950684", "state": "Utah"}'
@@ -147,3 +147,9 @@ curl -X POST localhost:5000/covid/state -H 'Content-Type: application/json' -d '
  
 50
 curl -X POST localhost:5000/covid/state -H 'Content-Type: application/json' -d '{"lat" : "30.391830", "long": "-92.329102", "state": "Louisiana"}'
+
+
+
+
+curl -X POST localhost:5000/covid/favorites -H 'Content-Type: application/json' -d '{"api_key": "a9e395d3c24bc56", "country": "USA"}'
+curl -X POST localhost:5000/covid/unfavorite -H 'Content-Type: application/json' -d '{"api_key": "a9e395d3c24bc56", "country": "USA"}'

@@ -43,28 +43,28 @@ class Account:
             WHERE pk=?"""
             cursor.execute(sql, (self.api_key, self.pk))
     
-    def save_favorites(self):
+    def save_favorites(self, country):
         with sqlite3.connect(self.dbpath) as conn:
             cursor = conn.cursor()
             sql = f"""
             INSERT INTO favorites (
                 account_pk,
-                updated,
                 country
-            ) VALUES (?,?,?)"""
-            values = (account_pk, updated, country)
+            ) VALUES (?,?)"""
+            values = (self.pk, country)
             cursor.execute(sql, values)
             return True
         return False
 
-    def delete_favorites(self):
+    def delete_favorites(self, country):
         with sqlite3.connect(self.dbpath) as conn:
             cursor = conn.cursor()
             sql = f"""
-            DELETE FROM favorites WHERE updated=? OR country=?
+            DELETE FROM favorites WHERE account_pk=? AND country=?
             """
-            values = (updated, country)
+            values = (self.pk, country)
             cursor.execute(sql, values)
+            # cursor.execute(sql)            
             return True
         return False
 
@@ -90,15 +90,6 @@ class Account:
             if account:
                 return Account(*account[:1], account[0])
             return None
-    
-    @classmethod
-    def get_username(cls, pk):
-        with sqlite3.connect(cls.dbpath) as conn:
-            cursor = conn.cursor()
-            cursor.execute(f"SELECT * FROM {cls.tablename} WHERE pk=?", pk) 
-            return cursor.fetchall()
-        return []
-
 
     @staticmethod
     def hash_password(password):

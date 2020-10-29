@@ -2,4 +2,18 @@
     text-align: left;
     display: flex;
     flex-direction: column;
+    float: right;
+    width: 50%;
+    /* background:gray; */
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.about-logo{
+    float: left;
+    width: 50%;
+    /* background: black; */
+}
+
+.aboutapp {
+    flex-direction: column;
 }

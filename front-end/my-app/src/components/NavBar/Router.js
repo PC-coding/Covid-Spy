@@ -8,19 +8,19 @@ import Tracker from '../Tracker/Tracker';
 import User from '../Account/Account';
 import About from '../About/About';
 
-const Router = ({ token, setToken}) => {
+const Router = ({ token, setToken, userFav, setUserFav}) => {
     if (token) {
         return(
             <div>
                 <Route path='/' exact component={Globe} />
                 <Route path='/tracker'>
-                    <Tracker token={token} setToken={setToken}/>
+                    <Tracker token={token} setToken={setToken} userFav={userFav} setUserFav={setUserFav}/>
                 </Route>
                 <Route path='/graphs'>
                     <Graph token={token} setToken={setToken}/>
                 </Route>
                 <Route path ='/user'>
-                    <User token={token} setToken={setToken} />
+                    <User token={token} setToken={setToken} userFav={userFav} setUserFav={setUserFav}/>
                 </Route>
             </div>
         )

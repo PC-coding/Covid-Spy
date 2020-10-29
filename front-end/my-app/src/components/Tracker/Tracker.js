@@ -159,7 +159,9 @@ function Tracker() {
       setCountryInfo(data);
       countryCode === "worldwide"
           ? setMapCenter([34.80746, -40.4796])
-          : setMapCenter([data['lat'], data['long']]);
+          // : setMapCenter([data['lat'], data['long']]);
+          : setMapCenter([data.lat, data.long]);
+          // setMapZoom(4);
     })
   }
 
@@ -168,7 +170,7 @@ function Tracker() {
     <div className="app_main">
       <div className="app_left">
         <div className="app_header">
-          <h1 style={{color:'white'}}>Covid-19 TRACKER</h1>
+          <h1 style={{color:'white', fontFamily:"Lucida Console, Courier, monospace"}}>Covid-Spy</h1>
           <FormControl className="app_dropdown">
             <Select variant="outlined" value={country} onChange={onCountryChange}>
               <MenuItem value="worldwide">Worldwide</MenuItem>

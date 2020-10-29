@@ -11,13 +11,14 @@ const useStateWithSessionStorage = (token, defaultValue) => {
 
 function App() {
   const [token, setToken] = useStateWithSessionStorage('token', '');
+  const [userFav, setUserFav] = useState([]);
 
   return (
   <BrowserRouter>
         <div className="app"> 
           <header className="App-header">
-            <NavBar token={token} setToken={setToken} />
-            <Router token={token} setToken={setToken}/>
+            <NavBar token={token} setToken={setToken} userFav={userFav} setUserFav={setUserFav}/>
+            <Router token={token} setToken={setToken} userFav={userFav} setUserFav={setUserFav}/>
           </header>
         </div>
     </BrowserRouter>

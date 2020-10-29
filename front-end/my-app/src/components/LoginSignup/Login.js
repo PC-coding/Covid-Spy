@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import img from '/Users/tappy/Byte/Phase_3_Project/front-end/my-app/src/components/images/userLogin.svg';
 
 export default function Login( { token, setToken } ) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("username");
+  const [password, setPassword] = useState("password");
 
   const sendLogin = async () => {
     const userData = JSON.stringify({"username": username, "password": password});
@@ -19,6 +19,7 @@ export default function Login( { token, setToken } ) {
     const data = await response.json();
     console.log(data);
     sessionStorage.setItem('token', data.session_id)
+    sessionStorage.setItem('username', data.username)
     setToken(data.session_id);
     }
 
@@ -32,7 +33,7 @@ export default function Login( { token, setToken } ) {
           <input onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" /><br/>
           <Link style={{color:'white', textDecoration:'none'}} to="/signup">New user? Create an account here!</Link>
           <br></br>
-          <button style={{color:'white', backgroundColor:'black', fontWeight:'bold', blockSize: 35}} onClick={sendLogin}>Login</button><br/>
+          <button style={{color:'white', backgroundColor:'black', fontWeight:'bold', blockSize: 35}} onClick={sendLogin}>Login</button>
         </div>
         )
     }

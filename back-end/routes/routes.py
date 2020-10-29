@@ -35,6 +35,7 @@ def login():
     if account:
         account.api_key = Account.random_api_key()
         account.save()
+        print(account.api_key)
         return jsonify({"session_id": account.api_key,
                         "username": account.username})
     return jsonify({"session_id": None,
@@ -50,23 +51,28 @@ def create_user():
     return jsonify({"session_id": new_account.api_key,
                     "username": new_account.username})
 
-@app.route("/covid/getUserInfo", methods=["POST"])
-def getUsername():
-    user = Account.api_authenticate(token)
-    if not user:
-        return jsonify({"user": []})
-    username = user.get_username()
-    return jsonify({"username": username})
                     
 
 #favorites routes
-# @app.route("/covid/favorites", methods=[""])
-# def addFav():
-#     return jsonify({})
+@app.route("/covid/favorites", methods=["POST"])
+def addFav():
+    data = request.get_json()
+    print(data)
+    if data is None: 
+        return jsonify({'Invalid': False})
+    account = Account.api_authenticate(data.get("api_key"))
+    print(account)
+    fav = account.save_favorites(data.get("country"))
+    return jsonify({'Success': fav})
 
-# @app.route("/covid/unfavorite", methods=[""])
-# def removeFav():
-#     return jsonify({})                    
+@app.route("/covid/unfavorite", methods=["POST"])
+def removeFav():
+    data = request.get_json()
+    account = Account.api_authenticate(data.get("api_key"))
+    if account is None:
+        return jsonify({'Deleted': False})    
+    deleted = account.delete_favorites(data.get("country", "api_key"))
+    return jsonify({'Deleted': deleted})
 
 
 #search by single location and updated
@@ -75,6 +81,15 @@ def getUsername():
 # def search_by_continent(continent_name, updated):
 #     name = Continents.select_continent(continent_name, updated)
 #     return jsonify({'Continent': name})
+
+@app.route('/covid/countries/filter', methods=['POST'])
+def filter_country():
+    data = request.get_json()
+    country_fav = []
+    for country in data.get('favorites'):
+        country_data = Countries.select_country(country)
+        country_fav.append(country_data)
+    return jsonify({'Favorites': country_fav})
 
 @app.route('/covid/countries/<country>', methods=['GET'])
 def search_by_country(country):

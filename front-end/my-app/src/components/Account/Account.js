@@ -1,30 +1,29 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-export default function User( { token, username, favorites } ){
-    const [userInfo, setUserInfo] = useState([]);
+export default function User( { token, username, userFav, setUserFav } ){
+    // const [userFav, setUserFav] = useState([]);
 
-    useEffect(() => {
-        const getUserInfo = async() => {
-            const userToken = JSON.stringify({'token': token})
-            const configs = {
-                methods: 'POST',
-                headers: { "Content-Type": "application/json"},
-                body: userToken
-            };
-            const response = await fetch('http://localhost:5000/covid/getUserInfo');
-            const data = await response.json();
-            setUserInfo(data.userInfo);
-        }
-        getUserInfo();
-     }, [])
+    const [userInfo, setUserInfo] = useState([]);
+    
+    const saveFavorites = async () => {
+        const userData = JSON.stringify({"favorites": userFav})
+        const configs = {
+            methods: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: userData
+        };
+        const response = await fetch('http://localhost:5000/covid/countries/filter');
+        const data = await response.json();
+        setUserInfo(data.Favorites);
+    }
 
     return(
         <div>
             <br></br>
-            <h3> Welcome back, {username} </h3>
+            <h3> Welcome back, {sessionStorage.getItem('username')} </h3>
             <h4> Here are your favorites:</h4>
-            <p>{favorites}</p>
+            <p>{setUserFav}</p>
         </div>
     )
 }
