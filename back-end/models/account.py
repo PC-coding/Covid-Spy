@@ -87,8 +87,10 @@ class Account:
             sql = """SELECT * FROM accounts WHERE api_key=?"""
             cursor.execute(sql, (api_key,))
             account = cursor.fetchone()
+            print(account)
             if account:
-                return Account(*account[:1], account[0])
+                return Account(*account[1:], account[0])
+                # return Account(account[1], account[2], account[3], account[4], account[5], account[0])
             return None
 
     @staticmethod

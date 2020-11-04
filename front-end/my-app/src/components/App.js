@@ -12,7 +12,7 @@ const useStateWithSessionStorage = (token, defaultValue) => {
 function App() {
   const [token, setToken] = useStateWithSessionStorage('token', '');
   const [userFav, setUserFav] = useState([]);
-
+ console.log(setUserFav);
   return (
   <BrowserRouter>
         <div className="app"> 
