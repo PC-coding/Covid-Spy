@@ -2,6 +2,7 @@ import sqlite3
 from hashlib import sha256
 import random
 from .favorites import Favorites
+from .countries import Countries
 
 class Account:
     tablename = 'accounts'

@@ -31,6 +31,7 @@ export default function User( { token, username, userFav, setUserFav } ){
             <h1> Coming Soon ...</h1>
             <br></br>
             <p>{setUserFav}</p>
+            <p>{userFav}</p>
         </div>
     )
 }

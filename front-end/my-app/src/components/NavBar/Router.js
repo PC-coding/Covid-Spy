@@ -31,10 +31,10 @@ const Router = ({ token, setToken, userFav, setUserFav}) => {
                     <About token={token} setToken={setToken} />
                 </Route>
                 <Route path='/login'> 
-                    <Login token={token} setToken={setToken}/>
+                    <Login token={token} setToken={setToken} userFav={userFav} setUserFav={setUserFav}/>
                 </Route>
                 <Route path='/signup'>
-                    <Signup token={token} setToken={setToken}/>
+                    <Signup token={token} setToken={setToken} userFav={userFav} setUserFav={setUserFav}/>
                 </Route>
                 <Route path='/' exact component={Globe}/>
                 <Route path='/tracker'>

@@ -39,7 +39,7 @@ export const sortData = (data) => {
 
   function Favorites({ token: token , country: country , userFav: userFav, setUserFav: setUserFav }){
     const SaveFavorites = async () => {
-      const userData = JSON.stringify({'country': userFav, 'api_key': sessionStorage.getItem("token")});
+      const userData = JSON.stringify({'country': country, 'userFav': userFav, 'api_key': sessionStorage.getItem("token")});
       console.log(token);
       const configs = {
           method: 'POST',
@@ -58,7 +58,8 @@ export const sortData = (data) => {
 export const prettyPrintStat = (stat) =>
   stat ? `+${numeral(stat).format("0.0a")}` : "+0";
 
-export const showDataOnMap = (data, casesType = "cases", {setUserFav: setUserFav, token: token} ) =>
+export const showDataOnMap = (data, casesType = "cases", { setUserFav: setUserFav, token: token } ) =>
+
 
   data.map((country) => (
     <Circle
@@ -91,8 +92,9 @@ export const showDataOnMap = (data, casesType = "cases", {setUserFav: setUserFav
             <div className="info-deaths">
               Deaths: {numeral(country.deaths).format("0,0")}
             </div>
-            <button style={{backgroundColor:'blue', color:'white', fontWeight:'bold'}}>Add to List</button>
-             {/* onClick={e => Favorites({token: token, country: country, setUserFav: setUserFav})} */}
+            {/* <button style={{backgroundColor:'blue', color:'white', fontWeight:'bold'}}>Add to List</button> */}
+            <button style={{backgroundColor:'blue', color:'white', fontWeight:'bold'}} onClick={e => Favorites({token: token, country: country, setUserFav: setUserFav})}>
+                    Add to List</button>
         </div>
           
       </Popup>
