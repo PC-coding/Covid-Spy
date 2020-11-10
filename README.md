@@ -15,6 +15,3 @@
 
 # Demo
 ![COVID-spy demo](https://media.giphy.com/media/EBSRZfJS1i4jOKYfRY/giphy.gif)
-
-<!-- # User Experience Guide
-    Users can either  -->
