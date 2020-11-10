@@ -14,4 +14,5 @@
     * CSS and Material-UI libraries were used to design animations and web layout.
 
 # Demo
+
 ![COVID-demo](https://media.giphy.com/media/UlWUwwhFK2dQzp9z1S/giphy.gif)
