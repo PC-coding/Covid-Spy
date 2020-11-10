@@ -15,4 +15,4 @@
 
 # Demo
 
-![COVID-demo](https://media.giphy.com/media/UlWUwwhFK2dQzp9z1S/giphy.gif)
+![COVID-demo](https://i.giphy.com/media/UlWUwwhFK2dQzp9z1S/giphy.webp)
