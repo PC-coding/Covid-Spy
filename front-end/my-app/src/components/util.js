@@ -63,7 +63,6 @@ export const showDataOnMap = (data, casesType = "cases", { setUserFav: setUserFa
 
   data.map((country) => (
     <Circle
-      // center={[country.countryInfo.lat, country.countryInfo.long]}
       center={[country.lat, country.long]}
 
       color={casesTypeColors[casesType].hex}

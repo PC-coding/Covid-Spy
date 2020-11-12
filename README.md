@@ -15,4 +15,12 @@
 
 # Demo
 
-![COVID](https://media.giphy.com/media/4m5seQuK83ODqmWWfT/giphy.gif)
+![COVID](https://media.giphy.com/media/RWmouuhtk1OZFbFzc4/giphy.gif)
+
+# Sources
+<a href="https://disease.sh/docs/"> Disease(sh) documentation<a>  
+<a href="https://github.com/disease-sh/API"> Disease(sh) Github<a>  
+<a href="https://reactjs.org/docs/getting-started.html"> React documentation <a>  
+<a href="https://www.chartjs.org/docs/latest/"> React Charts.js documentation<a>  
+<a href="https://react-leaflet.js.org/docs/start-introduction"> React leaflet.js documentation<a>  
+<a href="https://material-ui.com/getting-started/installation/"> Material-UI documentation<a>  

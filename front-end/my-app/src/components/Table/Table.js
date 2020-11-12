@@ -9,7 +9,8 @@ function Table({ countries }) {
                 <tr>
                     <td>
                         <div className='flaginfo'>
-                            <img src={countryInfo.flag} style={{height:'26px', width:'38px'}} />
+                            <img src={countryInfo.flag} style={{height:'26px', 
+                            width:'38px'}} />
                         </div>
                     </td>
                     <td>{country}</td>

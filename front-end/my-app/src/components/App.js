@@ -17,8 +17,10 @@ function App() {
   <BrowserRouter>
         <div className="app"> 
           <header className="App-header">
-            <NavBar token={token} setToken={setToken} userFav={userFav} setUserFav={setUserFav}/>
-            <Router token={token} setToken={setToken} userFav={userFav} setUserFav={setUserFav}/>
+            <NavBar token={token} setToken={setToken} userFav={userFav} 
+            setUserFav={setUserFav}/>
+            <Router token={token} setToken={setToken} userFav={userFav} 
+            setUserFav={setUserFav}/>
           </header>
         </div>
     </BrowserRouter>

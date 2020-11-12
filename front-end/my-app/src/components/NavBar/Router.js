@@ -14,13 +14,15 @@ const Router = ({ token, setToken, userFav, setUserFav}) => {
             <div>
                 <Route path='/' exact component={Globe} />
                 <Route path='/tracker'>
-                    <Tracker token={token} setToken={setToken} userFav={userFav} setUserFav={setUserFav}/>
+                    <Tracker token={token} setToken={setToken} userFav={userFav} 
+                    setUserFav={setUserFav}/>
                 </Route>
                 <Route path='/graphs'>
                     <Graph token={token} setToken={setToken}/>
                 </Route>
                 <Route path ='/user'>
-                    <User token={token} setToken={setToken} userFav={userFav} setUserFav={setUserFav}/>
+                    <User token={token} setToken={setToken} userFav={userFav} 
+                    setUserFav={setUserFav}/>
                 </Route>
             </div>
         )
@@ -31,10 +33,12 @@ const Router = ({ token, setToken, userFav, setUserFav}) => {
                     <About token={token} setToken={setToken} />
                 </Route>
                 <Route path='/login'> 
-                    <Login token={token} setToken={setToken} userFav={userFav} setUserFav={setUserFav}/>
+                    <Login token={token} setToken={setToken} userFav={userFav} 
+                    setUserFav={setUserFav}/>
                 </Route>
                 <Route path='/signup'>
-                    <Signup token={token} setToken={setToken} userFav={userFav} setUserFav={setUserFav}/>
+                    <Signup token={token} setToken={setToken} userFav={userFav} 
+                    setUserFav={setUserFav}/>
                 </Route>
                 <Route path='/' exact component={Globe}/>
                 <Route path='/tracker'>

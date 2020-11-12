@@ -60,9 +60,9 @@ def addFav():
     print(data)
     if data is None: 
         return jsonify({'Invalid': False})
-    account = Account.api_authenticate(data.get("api_key"))
-    print(account)
-    fav = account.save_favorites(data.get("country"))
+    acc = Account.api_authenticate(data.get("api_key"))
+    print(acc)
+    fav = acc.save_favorites(data.get("country"))
     return jsonify({'Success': fav})
 
 @app.route("/covid/unfavorite", methods=["POST"])
