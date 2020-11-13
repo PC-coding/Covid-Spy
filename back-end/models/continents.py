@@ -53,15 +53,3 @@ class Continents:
             cursor.execute(sql, (time_stamp,))
             return cursor.fetchall()
         return []
-    
-    # @classmethod
-    # def select_all_continent_month(cls, date):
-    #     with sqlite3.connect(cls.dbpath) as conn:
-    #         cursor = conn.cursor()
-    #         sql = f"""
-    #         SELECT * FROM {cls.tablename} WHERE date =? - 00/30/00
-    #         ;"""
-    #         cursor.execute(sql, (date,))
-    #         return cursor.fetchall()
-    #     return []
-    

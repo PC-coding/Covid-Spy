@@ -72,16 +72,8 @@ class Countries:
             ;"""
             values = (country,)
             cursor.execute(sql, values)
-            # return cursor.fetchall()
-            # return [cls(**row) for row in cursor.fetchall()]
             return cls(**cursor.fetchone())
         return False
-    
-    # def dict_factory(cursor, row):
-    #     d = {}
-    #     for idx, col in enumerate(cursor.description):
-    #         d[col[0]] = row[idx]
-    #     return d
 
     @classmethod
     def select_all_countries(cls):
@@ -95,4 +87,3 @@ class Countries:
             # return cursor.fetchall()
             return [cls(**row) for row in cursor.fetchall()]
         return []
-

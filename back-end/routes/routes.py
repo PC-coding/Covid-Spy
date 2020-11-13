@@ -13,7 +13,7 @@ API_BASE1= 'https://disease.sh/v3/covid-19/states'
 app = Flask(__name__)
 CORS(app)
 
-#checking to see if localhost works
+# checking to see if localhost works
 
 @app.route('/', methods=['GET'])
 def hi():
@@ -21,7 +21,8 @@ def hi():
 
 
 
-#user routes
+
+# user routes
 
 @app.route("/covid/login", methods=["POST"])
 def login():
@@ -51,9 +52,10 @@ def create_user():
     return jsonify({"session_id": new_account.api_key,
                     "username": new_account.username})
 
-                    
 
-#favorites routes
+
+
+# favorites routes
 @app.route("/covid/favorites", methods=["POST"])
 def addFav():
     data = request.get_json()
@@ -75,12 +77,9 @@ def removeFav():
     return jsonify({'Deleted': deleted})
 
 
-#search by single location and updated
 
-# @app.route('/covid/continent/<continent_name>/<updated>', methods=['GET'])
-# def search_by_continent(continent_name, updated):
-#     name = Continents.select_continent(continent_name, updated)
-#     return jsonify({'Continent': name})
+
+# search by single location and updated
 
 @app.route('/covid/countries/filter', methods=['POST'])
 def filter_country():
@@ -109,25 +108,14 @@ def update_states():
     long = data.get('long')
     state = data.get('state')
     print(lat,long)
-    # update = States.update(lat, long)
     update_list = States(lat=lat, long=long, state=state)
     update = update_list.update()
     return jsonify({'Success': update})
 
 
-# @app.route('/covid/county/<county_name>/<updated>', methods=['GET'])
-# def search_by_county(county_name, updated):
-#     name = Counties.select_county(county_name, updated)
-#     return jsonify({'County': name})
 
 
-
-#search by all locations on a certain updated
-
-# @app.route('/covid/continents/<updated>', methods=['GET'])
-# def search_by_all_continents(updated):
-#     name = Continents.select_all_continents(updated)
-#     return jsonify({'Continent': name})
+# search by all locations on a certain updated
 
 @app.route('/covid/countries/', methods=['GET'])
 def search_by_all_countries():
@@ -139,17 +127,10 @@ def search_by_all_states():
     name = States.select_all_states()
     return jsonify({'State': name})
 
-# @app.route('/covid/counties/<updated>', methods=['GET'])
-# def search_by_all_counties(updated):
-#     name = Counties.select_all_counties(updated)
-#     return jsonify({'County': name})
 
 
 
-
-# @app.route('/covid/save_continent', methods=['GET'])
-# def save_continents():
-#     return jsonify
+# saving country/state data to database
 
 @app.route('/covid/save_country', methods=['GET'])
 def save_countries():
@@ -178,11 +159,3 @@ def save_states():
                         state.get('deaths'), state.get('todayDeaths'))
         new_data.save()
     return jsonify({'State': states})
-
-# @app.route('/covid/save_county', methods=['GET'])
-# def save_counties():
-#     return jsonify
-
-# @app.route('/covid/', methods=[''])
-# def ():
-#     return jsonify
