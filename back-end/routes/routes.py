@@ -30,13 +30,9 @@ def login():
     username = data.get("username")
     password = data.get("password")
     account = Account.login(username, password)
-    print(username)
-    print(password)
-    print(account)
     if account:
         account.api_key = Account.random_api_key()
         account.save()
-        print(account.api_key)
         return jsonify({"session_id": account.api_key,
                         "username": account.username})
     return jsonify({"session_id": None,
@@ -59,13 +55,13 @@ def create_user():
 @app.route("/covid/favorites", methods=["POST"])
 def addFav():
     data = request.get_json()
-    print(data)
     if data is None: 
         return jsonify({'Invalid': False})
     acc = Account.api_authenticate(data.get("api_key"))
     print(acc)
-    fav = acc.save_favorites(data.get("country"))
-    return jsonify({'Success': fav})
+    fav = acc.save_favorites(data.get("country")["country"])
+    # return jsonify({'Success': fav})
+    return jsonify([fav])
 
 @app.route("/covid/unfavorite", methods=["POST"])
 def removeFav():
@@ -76,19 +72,35 @@ def removeFav():
     deleted = account.delete_favorites(data.get("country", "api_key"))
     return jsonify({'Deleted': deleted})
 
+# @app.route('/covid/countries/filter', methods=['POST'])
+# def filter_country():
+#     data = request.get_json()
+#     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+#     print(data)
+#     country_fav = []
+#     for country in data.get('favorites'):
+#         country_data = Countries.select_country(country)
+#         country_fav.append(country_data)
+#     return jsonify({'Favorites': country_fav})
+
+@app.route('/covid/countries/filter', methods=['POST'])
+def filter_country():
+    data = request.get_json()
+    account = Account.api_authenticate(data.get("api_key"))
+    favs = account.filter_favs()
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print(favs)
+    country_fav = []
+    for country in favs:
+        country_data = Countries.select_country(country[3]).country
+        country_fav.append(country_data)
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    return jsonify({'Favorites': country_fav})
 
 
 
 # search by single location and updated
 
-@app.route('/covid/countries/filter', methods=['POST'])
-def filter_country():
-    data = request.get_json()
-    country_fav = []
-    for country in data.get('favorites'):
-        country_data = Countries.select_country(country)
-        country_fav.append(country_data)
-    return jsonify({'Favorites': country_fav})
 
 @app.route('/covid/countries/<country>', methods=['GET'])
 def search_by_country(country):

@@ -1,5 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+// import Table from '../Table/Table.js';
+
 
 export default function User( { token, username, userFav, setUserFav } ){
     // const [userFav, setUserFav] = useState([]);
@@ -16,7 +18,9 @@ export default function User( { token, username, userFav, setUserFav } ){
         console.log(token);
         const response = await fetch('http://localhost:5000/covid/countries/filter', configs);
         const data = await response.json();
-        setUserInfo(data.favorites);
+        // setUserInfo(data.favorites);
+        console.log(data);
+        setUserFav(data.Favorites);
     }
     // saveFavorites();
     
@@ -28,10 +32,19 @@ export default function User( { token, username, userFav, setUserFav } ){
             <h4> Here are your favorites:</h4>
             <br></br>
             <br></br>
-            <h1> Coming Soon ...</h1>
-            <br></br>
-            <p>{setUserFav}</p>
+            {/* <h1> Coming Soon ...</h1>
+            <br></br> */}
+            {/* <script>
+            userFav.array.forEach(element => {
+                <p>element
+                </p>
+            });     
+            </script>     */}
             <p>{userFav}</p>
+            <button onClick={saveFavorites}>
+                Click me to get your favorites!</button>     
+
+            {/* <Table countries={userFav} /> */}
         </div>
     )
 }

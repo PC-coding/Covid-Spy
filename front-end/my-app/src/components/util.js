@@ -48,9 +48,10 @@ export const sortData = (data) => {
       };
       console.log(token);
       const response = await fetch('http://localhost:5000/covid/favorites', configs);
+      console.log(response);
       const favData = await response.json();
       console.log(favData);
-      setUserFav(favData.userFav);
+      // setUserFav(favData);
     }
     SaveFavorites();
   }
@@ -58,7 +59,7 @@ export const sortData = (data) => {
 export const prettyPrintStat = (stat) =>
   stat ? `+${numeral(stat).format("0.0a")}` : "+0";
 
-export const showDataOnMap = (data, casesType = "cases", { setUserFav: setUserFav, token: token } ) =>
+export const showDataOnMap = (data, casesType = "cases", { userFav: userFav, setUserFav: setUserFav, token: token } ) =>
 
 
   data.map((country) => (
@@ -92,7 +93,7 @@ export const showDataOnMap = (data, casesType = "cases", { setUserFav: setUserFa
               Deaths: {numeral(country.deaths).format("0,0")}
             </div>
             {/* <button style={{backgroundColor:'blue', color:'white', fontWeight:'bold'}}>Add to List</button> */}
-            <button style={{backgroundColor:'blue', color:'white', fontWeight:'bold'}} onClick={e => Favorites({token: token, country: country, setUserFav: setUserFav})}>
+            <button style={{backgroundColor:'blue', color:'white', fontWeight:'bold'}} onClick={e => Favorites({token: token, country: country, userFav: userFav, setUserFav: setUserFav})}>
                     Add to List</button>
         </div>
           

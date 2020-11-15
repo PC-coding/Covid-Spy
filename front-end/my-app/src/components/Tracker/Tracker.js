@@ -7,7 +7,7 @@ import { sortData, prettyPrintStat } from '../util.js';
 import "leaflet/dist/leaflet.css";
 
 
-function Tracker() {
+function Tracker( { userFav: userFav, setUserFav: setUserFav }) {
     // countries state
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState('worldwide');
@@ -236,7 +236,7 @@ function Tracker() {
         </div> */}
 
         {/* <Map casesType={casesType} states={mapStates} center ={mapStateCenter} zoom={mapStateZoom} /> */}
-        <Map casesType={casesType} countries={mapCountries} center={mapCenter} zoom={mapZoom}/>
+        <Map casesType={casesType} countries={mapCountries} center={mapCenter} zoom={mapZoom} setUserFav={setUserFav} userFav={userFav} />
       </div> 
     </div>
   );

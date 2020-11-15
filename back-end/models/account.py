@@ -69,6 +69,19 @@ class Account:
             return True
         return False
 
+    def filter_favs(self):
+        with sqlite3.connect(self.dbpath) as conn:
+            cursor = conn.cursor()
+            sql = f"""
+            SELECT * FROM favorites WHERE account_pk=?
+            """
+            values = (self.pk, )
+            print(self.pk)
+            req = cursor.execute(sql, values)
+            return req.fetchall()
+        return False
+
+
     @classmethod
     def login(cls, username, password):
         with sqlite3.connect(cls.dbpath) as conn:
