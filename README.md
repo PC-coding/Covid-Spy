@@ -1,17 +1,19 @@
-# COVID-Spy
-    A web application engineered and designed to be a COVID-19 Tracking App  
+<h1> COVID-Spy </h1>
+   <p> A web application engineered and designed to be a COVID-19 Tracking App  
     using React and Flask. This app was created to provide a more visual and  
-    easily comprehensible way to digest this data. 
+    easily comprehensible way to digest this data. </p>
 
 # What I Learned
-    * Using multiple API calls to update UI.
-    * Reinforced knowledge of API integration.
-    * Created backend database after parsing the API to store COVID data and  
-    user information. 
-    * Created user authentication functionality.
-    * Leaflet.js / Chart.js libraries were used to create the interactive map and  
-    responsive line graph components. 
-    * CSS and Material-UI libraries were used to design animations and web layout.
+<ul>
+    <li> Using react and fetch calls to dynamically update UI.</li>
+    <li> Reinforced knowledge of API integration. </li>
+    <li> Created backend database after scraping the API to store COVID data and  
+    user information </li>
+    <li> Created user authentication functionality. </li>
+    <li> Leaflet.js / Chart.js libraries were used to create the interactive map and  
+    responsive line graph components </li>
+    <li> CSS and Material-UI libraries were used to design animations and web layout. </li>
+</ul>
 
 # Demo
 

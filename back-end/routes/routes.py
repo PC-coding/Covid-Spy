@@ -52,15 +52,14 @@ def create_user():
 
 
 # favorites routes
+
 @app.route("/covid/favorites", methods=["POST"])
 def addFav():
     data = request.get_json()
     if data is None: 
         return jsonify({'Invalid': False})
     acc = Account.api_authenticate(data.get("api_key"))
-    print(acc)
-    fav = acc.save_favorites(data.get("country")["country"])
-    # return jsonify({'Success': fav})
+    fav = acc.save_favorites(data.get("country", "active")["country"])
     return jsonify([fav])
 
 @app.route("/covid/unfavorite", methods=["POST"])
@@ -72,40 +71,36 @@ def removeFav():
     deleted = account.delete_favorites(data.get("country", "api_key"))
     return jsonify({'Deleted': deleted})
 
-# @app.route('/covid/countries/filter', methods=['POST'])
-# def filter_country():
-#     data = request.get_json()
-#     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-#     print(data)
-#     country_fav = []
-#     for country in data.get('favorites'):
-#         country_data = Countries.select_country(country)
-#         country_fav.append(country_data)
-#     return jsonify({'Favorites': country_fav})
-
 @app.route('/covid/countries/filter', methods=['POST'])
 def filter_country():
     data = request.get_json()
     account = Account.api_authenticate(data.get("api_key"))
     favs = account.filter_favs()
-    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    print(favs)
     country_fav = []
     for country in favs:
         country_data = Countries.select_country(country[3]).country
         country_fav.append(country_data)
-    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     return jsonify({'Favorites': country_fav})
+
+# @app.route('/covid/countries/filter', methods=['POST'])
+# def filter_country():
+#     data = request.get_json()
+#     account = Account.api_authenticate(data.get("api_key"))
+#     favs = account.filter_favs()
+#     country_fav = []
+#     for country in favs:
+#         country_data = Countries.select_country(country[1:]).country
+#         country_fav.append(country_data)
+#     return jsonify({'Favorites': country_fav})
+
 
 
 
 # search by single location and updated
 
-
 @app.route('/covid/countries/<country>', methods=['GET'])
 def search_by_country(country):
     countries = Countries.select_country(country)
-    # return jsonify([country.to_json() for country in countries])
     return jsonify(countries.to_json())
 
 @app.route('/covid/state/<state>', methods=['GET'])
@@ -119,7 +114,6 @@ def update_states():
     lat = data.get('lat')
     long = data.get('long')
     state = data.get('state')
-    print(lat,long)
     update_list = States(lat=lat, long=long, state=state)
     update = update_list.update()
     return jsonify({'Success': update})
@@ -147,7 +141,6 @@ def search_by_all_states():
 @app.route('/covid/save_country', methods=['GET'])
 def save_countries():
     countries = requests.get(API_BASE).json()
-    # print(countries)
     for country in countries:
         new_data = Countries(country.get('updated'), country.get('country'), 
                             country.get('active'), country.get('cases'), 
