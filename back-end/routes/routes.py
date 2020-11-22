@@ -53,13 +53,27 @@ def create_user():
 
 # favorites routes
 
+# -- for country names + country active cases -- 
+# @app.route("/covid/favorites", methods=["POST"])
+# def addFav():
+#     data = request.get_json()
+#     if data is None: 
+#         return jsonify({'Invalid': False})
+#     acc = Account.api_authenticate(data.get("api_key"))
+#     fav = acc.save_favorites(data.get("country")["country"],
+#                             data.get("country")["active"])
+#     print(fav)
+#     return jsonify([fav])
+
 @app.route("/covid/favorites", methods=["POST"])
 def addFav():
     data = request.get_json()
     if data is None: 
         return jsonify({'Invalid': False})
     acc = Account.api_authenticate(data.get("api_key"))
-    fav = acc.save_favorites(data.get("country", "active")["country"])
+    print(acc)
+    fav = acc.save_favorites(data.get("country")["country"])
+    print(fav)
     return jsonify([fav])
 
 @app.route("/covid/unfavorite", methods=["POST"])

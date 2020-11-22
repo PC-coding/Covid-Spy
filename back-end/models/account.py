@@ -43,7 +43,22 @@ class Account:
                 api_key=?
             WHERE pk=?"""
             cursor.execute(sql, (self.api_key, self.pk))
-    
+
+    # -- for country names + country active cases -- 
+    # def save_favorites(self, country):
+    #     with sqlite3.connect(self.dbpath) as conn:
+    #         cursor = conn.cursor()
+    #         sql = f"""
+    #         INSERT INTO favorites (
+    #             account_pk,
+    #             country,
+    #             active
+    #         ) VALUES (?,?,?)"""
+    #         values = (self.pk, country, active)
+    #         cursor.execute(sql, values)
+    #         return True
+    #     return False
+
     def save_favorites(self, country):
         with sqlite3.connect(self.dbpath) as conn:
             cursor = conn.cursor()
@@ -76,7 +91,6 @@ class Account:
             SELECT * FROM favorites WHERE account_pk=?
             """
             values = (self.pk, )
-            print(self.pk)
             req = cursor.execute(sql, values)
             return req.fetchall()
         return False
@@ -87,7 +101,6 @@ class Account:
         with sqlite3.connect(cls.dbpath) as conn:
             curs = conn.cursor()
             sql = """SELECT * FROM accounts WHERE username=? and password_hash=?;"""
-            print(username, cls.hash_password(password))
             curs.execute(sql, (username, cls.hash_password(password)))
             account = curs.fetchone()
             if account:
@@ -101,7 +114,6 @@ class Account:
             sql = """SELECT * FROM accounts WHERE api_key=?"""
             cursor.execute(sql, (api_key,))
             account = cursor.fetchone()
-            print(account)
             if account:
                 return Account(*account[1:], account[0])
                 # return Account(account[1], account[2], account[3], account[4], account[5], account[0])
