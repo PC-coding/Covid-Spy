@@ -7,7 +7,7 @@ def schema(dbpath="covid.db"):
         cursor.execute("""
         CREATE TABLE covid_data_countries (
             updated INTEGER,
-            country VARCHAR,
+            country VARCHAR UNIQUE,
             active INTEGER,
             cases INTEGER,
             todayCases INTEGER,

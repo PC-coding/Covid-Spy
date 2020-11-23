@@ -72,7 +72,7 @@ class Countries:
             ;"""
             values = (country,)
             cursor.execute(sql, values)
-            return cls(*cursor.fetchone())
+            return cls(**cursor.fetchone())
         return False
 
     @classmethod

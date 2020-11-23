@@ -72,6 +72,34 @@ class Account:
             return True
         return False
 
+    # def save_favorites(self, country):
+    #     if self.pk:
+    #         self._updatefav(country)
+    #     else:
+    #         self._insertfav(country)
+
+    # def _updatefav(self, country):
+    #     with sqlite3.connect(self.dbpath) as conn:
+    #         cursor = conn.cursor()
+    #         sql = f"""
+    #         UPDATE favorites SET 
+    #             country=?
+    #         WHERE account_pk=?"""
+    #         cursor.execute(sql, (country, self.pk))
+
+    # def _insertfav(self, country):
+    #         with sqlite3.connect(self.dbpath) as conn:
+    #             cursor = conn.cursor()
+    #             sql = f"""
+    #             INSERT INTO favorites (
+    #                 account_pk,
+    #                 country
+    #             ) VALUES (?,?)"""
+    #             values = (self.pk, country)
+    #             cursor.execute(sql, values)
+    #             return True
+    #         return False
+
     def delete_favorites(self, country):
         with sqlite3.connect(self.dbpath) as conn:
             cursor = conn.cursor()
@@ -92,7 +120,7 @@ class Account:
             """
             values = (self.pk, )
             req = cursor.execute(sql, values)
-            return req.fetchall()
+            return list(set(req.fetchall()))
         return False
 
 
